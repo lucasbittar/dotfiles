@@ -1,2 +1,3 @@
 # Ignore oh-my-zsh folder
+.DS_Store
 oh-my-zsh/
