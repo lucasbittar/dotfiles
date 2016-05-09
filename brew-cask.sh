@@ -11,6 +11,7 @@ brew tap caskroom/versions
 brew cask install spectacle
 brew cask install dropbox
 brew cask install skype
+brew cask install adobe-creative-cloud
 
 # dev
 brew cask install iterm2
