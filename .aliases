@@ -9,7 +9,7 @@ alias gp="git pull"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gl="git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
