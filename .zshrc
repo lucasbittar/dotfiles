@@ -7,7 +7,7 @@ export ZSH=/Users/lucasbittar/Projects/dotfiles/oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="suvash"
 
-plugins=(z)
+plugins=(sublime z)
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
