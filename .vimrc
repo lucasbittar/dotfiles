@@ -10,11 +10,17 @@ call vundle#begin()
 
 " Let Vundle manage itself
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'christoomey/vim-sort-motion'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 call vundle#end() 
 " }}}
 
@@ -63,8 +69,9 @@ endif
 nnoremap <leader><space> :nohlsearch<CR>
 " Space opens/closes folds
 nnoremap <space> za
+" Replace ESC key
+inoremap jk <ESC>
 " }}}
-
 " FOLDING {{{
 " Enable folding
 set foldenable
@@ -73,7 +80,7 @@ set foldlevelstart=10
 " 10 nested fold max
 set foldnestmax=10
 " Fold based on indent level
-set foldmethod=indent
+set foldmethod=syntax
 " }}}
 
 " VISUAL {{{
