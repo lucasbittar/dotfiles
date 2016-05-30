@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/lucasbittar/Projects/dotfiles/oh-my-zsh
+export ZSH=~/Projects/dotfiles/oh-my-zsh
 
 # My own custom theme.
 ZSH_THEME="lucasbittar"
