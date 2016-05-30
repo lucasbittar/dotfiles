@@ -3,6 +3,21 @@
 " Set manualy foldmethod to marker specifically for .vimrc
 " vim:fdm=marker : foldlevel=0
 
+" VUNDLE PLUGINS {{{
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage itself
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
+call vundle#end() 
+" }}}
+
 " DEFAULT SETTINGS {{{
 " Detect filetype
 filetype plugin on
@@ -42,12 +57,14 @@ if exists("&relativenumber")
 	au BufReadPost * set relativenumber
 endif
 " }}}
+
 " KEY REMAPING {{{
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 " Space opens/closes folds
 nnoremap <space> za
 " }}}
+
 " FOLDING {{{
 " Enable folding
 set foldenable
@@ -58,6 +75,7 @@ set foldnestmax=10
 " Fold based on indent level
 set foldmethod=indent
 " }}}
+
 " VISUAL {{{
 " Enable syntax highlight
 syntax on
