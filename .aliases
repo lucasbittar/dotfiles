@@ -32,8 +32,8 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 
 # Linux only commands
 # Restart Network Conections (Wifi)
-alias restartwifi="sudo service network-manager restart
-alias connectvpn="nmcli con up id VPN\ IR
+alias restartwifi="sudo service network-manager restart"
+alias connectvpn="nmcli con up id VPN\ IR"
 ###
 
 # Show/hide hidden files in Finder
