@@ -86,6 +86,10 @@ set foldmethod=syntax
 " VISUAL {{{
 " Enable syntax highlight
 syntax on
+" Set theme
+set t_Co=256
+colorscheme Benokai
+highlight Normal term=bold cterm=NONE ctermfg=white ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 " Show status line
 set laststatus=2
 " Show what mode you're currently in
@@ -96,6 +100,7 @@ set showcmd
 set modelines=1
 " Show line number
 set number
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=0 gui=NONE guifg=DarkGrey guibg=NONE
 " Show file title in terminal tab
 set title
 " Highlight current line
