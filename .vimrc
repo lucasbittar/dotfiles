@@ -4,6 +4,7 @@
 " vim:fdm=marker : foldlevel=0
 
 " VUNDLE PLUGINS {{{
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -22,6 +23,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 call vundle#end() 
+
 " }}}
 
 " DEFAULT SETTINGS {{{
