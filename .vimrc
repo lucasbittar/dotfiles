@@ -1,8 +1,5 @@
 " Lucas's .vimrc
 
-" Set manualy foldmethod to marker specifically for .vimrc
-" vim:fdm=marker : foldlevel=0
-
 " VUNDLE PLUGINS {{{
 
 " set the runtime path to include Vundle and initialize
@@ -123,3 +120,6 @@ if version >= 700
 endif
  
 " }}}
+
+" Set manualy foldmethod to marker specifically for .vimrc
+" vim:foldmethod=marker:foldlevel=0
