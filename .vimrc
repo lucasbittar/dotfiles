@@ -6,20 +6,23 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Let Vundle manage itself
+" Utilities
 Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'jelera/vim-javascript-syntax'
 Plugin 'kien/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+
+" Language-specific plugin
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'mattn/emmet-vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'rstacruz/sparkup'
 call vundle#end() 
 
 " }}}
