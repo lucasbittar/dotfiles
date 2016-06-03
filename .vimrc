@@ -115,8 +115,8 @@ set statusline+=%{strlen(&ft)?&ft:'none'}\
 
 " Change the status line based on mode
 if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
-  au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+  au InsertEnter * hi StatusLine term=reverse ctermbg=200 gui=undercurl 
+  au InsertLeave * hi StatusLine term=reverse ctermfg=255 ctermbg=0 gui=bold,reverse
 endif
  
 " }}}
