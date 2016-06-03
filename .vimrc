@@ -20,9 +20,11 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 
 " Language-specific plugin
+Plugin 'gavocanov/vim-js-indent'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/yajs.vim'
 Plugin 'rstacruz/sparkup'
 Plugin 'scrooloose/syntastic'
 call vundle#end() 
