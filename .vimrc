@@ -10,6 +10,7 @@ call vundle#begin()
 Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-repeat'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
