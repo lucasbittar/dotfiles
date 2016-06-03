@@ -10,20 +10,21 @@ call vundle#begin()
 Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-repeat'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
+Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 
 " Language-specific plugin
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'rstacruz/sparkup'
+Plugin 'scrooloose/syntastic'
 call vundle#end() 
 
 " }}}
