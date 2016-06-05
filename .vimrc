@@ -13,6 +13,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
@@ -32,6 +33,15 @@ Plugin 'othree/yajs.vim'
 Plugin 'rstacruz/sparkup'
 Plugin 'scrooloose/syntastic'
 call vundle#end() 
+
+" }}}
+
+" PLUGINS CONFIG {{{
+
+" CtrlP
+let g:ctrlp_cmd='CtrlPMixed'
+let g:ctrlp_dotfiles=1
+let g:ctrlp_working_path_mode = 'ra'
 
 " }}}
 
@@ -84,6 +94,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Quick tabs switching
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+
+" Line navigation ignores line wrap
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
 " }}}
 
 " FOLDING {{{
@@ -97,7 +117,7 @@ set foldmethod=indent " Fold based on indent level
 
 " TAB {{{
 
-set noexpandtab " insert tabs rather than spaces for <Tab>
+set expandtab " insert spaces for tabbed content
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=2 " the visible width of tabs
 set softtabstop=2 " edit as if the tabs are 4 characters wide
