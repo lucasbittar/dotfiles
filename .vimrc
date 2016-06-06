@@ -11,6 +11,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-sort-motion'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -54,9 +55,9 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=16
 
 " Vim Airline
-let g:airline_theme='hybridline'
+let g:airline_theme='powerlineish'
 let g:airline_powerline_fonts=1
-let g:airline_skip_empty_sections = 1
+let g:airline_skip_empty_sections=1
 
 " }}}
 
@@ -180,13 +181,13 @@ set ruler " Show cursor position
 " set statusline+=%{strlen(&ft)?&ft:'none'}\ 
 
 " Change the status line based on mode
-if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=60 ctermfg=231
-  au InsertLeave * hi StatusLine term=reverse ctermfg=255 ctermbg=0
-endif
+" if version >= 700
+"   au InsertEnter * hi StatusLine term=reverse ctermbg=60 ctermfg=231
+"   au InsertLeave * hi StatusLine term=reverse ctermfg=255 ctermbg=0
+" endif
  
 " default the statusline to green when entering Vim
-hi statusline ctermfg=255 ctermbg=0
+" hi statusline ctermfg=255 ctermbg=0
  
 " }}}
 
