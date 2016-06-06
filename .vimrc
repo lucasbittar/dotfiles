@@ -43,6 +43,14 @@ let g:ctrlp_cmd='CtrlPMixed'
 let g:ctrlp_dotfiles=1
 let g:ctrlp_working_path_mode = 'ra'
 
+" Vim Indent Guides
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=2
+let g:indent_guides_auto_colors=0
+
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkGrey ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=black ctermbg=16
+
 " }}}
 
 " DEFAULT SETTINGS {{{
@@ -141,6 +149,9 @@ set showmode " Show what mode you're currently in
 set showcmd " Show what commands you're typing
 set modelines=1 " Enable modelines
 set number " Show line number
+
+" Hightlight line color
+hi CursorLine cterm=NONE ctermbg=234 guibg=darkred 
 
 " Custom line number theme
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=0 gui=NONE guifg=DarkGrey guibg=NONE
