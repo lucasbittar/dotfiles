@@ -19,6 +19,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Language-specific plugin
 Plugin 'cakebaker/scss-syntax.vim'
@@ -48,8 +50,13 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=2
 let g:indent_guides_auto_colors=0
 
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=DarkGrey ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=black ctermbg=16
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=16
+
+" Vim Airline
+let g:airline_theme='hybridline'
+let g:airline_powerline_fonts=1
+let g:airline_skip_empty_sections = 1
 
 " }}}
 
@@ -128,10 +135,13 @@ set foldmethod=indent " Fold based on indent level
 set expandtab " insert spaces for tabbed content
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=2 " the visible width of tabs
-set softtabstop=2 " edit as if the tabs are 4 characters wide
+set softtabstop=2 " edit as if the tabs are 2 characters wide
 set shiftwidth=2 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
+
+" Defines indentation for HTML files
+autocmd FileType html setlocal expandtab shiftwidth=4 softtabstop=4
 
 " }}}
 
@@ -142,7 +152,7 @@ syntax on " Enable syntax highlight
 " Set theme
 set t_Co=256
 colorscheme Benokai
-highlight Normal term=bold cterm=NONE ctermfg=white ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight Normal term=bold cterm=NONE ctermfg=white ctermbg=NONE
 
 set laststatus=2 " Show status line
 set showmode " Show what mode you're currently in
@@ -151,28 +161,32 @@ set modelines=1 " Enable modelines
 set number " Show line number
 
 " Hightlight line color
-hi CursorLine cterm=NONE ctermbg=234 guibg=darkred 
+hi CursorLine cterm=NONE ctermbg=234
 
 " Custom line number theme
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=0 gui=NONE guifg=DarkGrey guibg=NONE
+highlight LineNr term=bold cterm=NONE ctermfg=242 ctermbg=234
 
 set title " Show file title in terminal tab
 set cursorline " Highlight current line
 set ruler " Show cursor position
 
 " Set status line
-set statusline=Filename:\ %F%m%r%h\ %w\ \ 
-set statusline+=Directory:\ %r%{getcwd()}%h\ \ \ 
-set statusline+=%=   " align right 
-set statusline+=Line:\ %l\ \ 
-set statusline+=%{&fileformat}\ \ 
-set statusline+=%{strlen(&ft)?&ft:'none'}\ 
+" set statusline=Filename:\ %F%m%r%h\ %w\ \ 
+" set statusline+=Directory:\ %r%{getcwd()}%h\ \ \ 
+" set statusline+=%=   " align right 
+" set statusline+=%{fugitive#statusline()}\ \ " git status
+" set statusline+=Line:\ %l\ \ 
+" set statusline+=%{&fileformat}\ \ 
+" set statusline+=%{strlen(&ft)?&ft:'none'}\ 
 
 " Change the status line based on mode
 if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=200 gui=undercurl 
-  au InsertLeave * hi StatusLine term=reverse ctermfg=255 ctermbg=0 gui=bold,reverse
+  au InsertEnter * hi StatusLine term=reverse ctermbg=60 ctermfg=231
+  au InsertLeave * hi StatusLine term=reverse ctermfg=255 ctermbg=0
 endif
+ 
+" default the statusline to green when entering Vim
+hi statusline ctermfg=255 ctermbg=0
  
 " }}}
 
