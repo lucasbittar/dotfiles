@@ -164,32 +164,16 @@ set number " Show line number
 " Hightlight line color
 hi CursorLine cterm=NONE ctermbg=234
 
+hi TabLineFill ctermfg=231 ctermbg=16
+hi TabLine ctermfg=250 ctermbg=16
+hi TabLineSel ctermfg=231 ctermbg=240
+
 " Custom line number theme
 highlight LineNr term=bold cterm=NONE ctermfg=242 ctermbg=234
 
 set title " Show file title in terminal tab
 set cursorline " Highlight current line
 set ruler " Show cursor position
-
-" Set status line
-" set statusline=Filename:\ %F%m%r%h\ %w\ \ 
-" set statusline+=Directory:\ %r%{getcwd()}%h\ \ \ 
-" set statusline+=%=   " align right 
-" set statusline+=%{fugitive#statusline()}\ \ " git status
-" set statusline+=Line:\ %l\ \ 
-" set statusline+=%{&fileformat}\ \ 
-" set statusline+=%{strlen(&ft)?&ft:'none'}\ 
-
-" Change the status line based on mode
-" if version >= 700
-"   au InsertEnter * hi StatusLine term=reverse ctermbg=60 ctermfg=231
-"   au InsertLeave * hi StatusLine term=reverse ctermfg=255 ctermbg=0
-" endif
- 
-" default the statusline to green when entering Vim
-" hi statusline ctermfg=255 ctermbg=0
- 
-" }}}
 
 " Set manualy foldmethod to marker specifically for .vimrc
 " vim:foldmethod=marker:foldlevel=0
