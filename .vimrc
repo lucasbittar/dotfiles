@@ -49,12 +49,11 @@ let g:ctrlp_dotfiles=1
 let g:ctrlp_working_path_mode = 'ra'
 
 " Vim Indent Guides
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=2
 let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=1
 
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=16
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
 
 " Vim Airline
 let g:airline_theme='powerlineish'
@@ -78,6 +77,11 @@ set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches
 set incsearch " Search as characters are entered
 set showmatch " Show matching brackets when text indicator is over them
+
+" Visible whitespace prettier
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
 
 " No sound errors
 set noerrorbells
