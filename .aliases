@@ -22,6 +22,9 @@ alias v="vim"
 alias c="clear"
 ###
 
+### Project specific
+alias rsync-mirelz="sudo rsync -r --progress /Users/lucasbittar/Projects/Rainier/server/src/main/webapp/resources /Users/lucasbittar/.homebrew/Cellar/tomcat7/7.0.69/libexec//webapps/server"
+
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
