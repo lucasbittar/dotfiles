@@ -20,6 +20,7 @@ alias master="git checkout master"
 alias g="git"
 alias v="vim"
 alias c="clear"
+alias ctags="`brew --prefix`/bin/ctags"
 ###
 
 ### Project specific
