@@ -72,11 +72,13 @@ let mapleader="," " Set leader key to ,
 set clipboard=unnamed " Use OS clipboard by default
 set autoindent " Copy indent to the new line
 set wildmenu " Enhance command-line completion
+set path+=** " Search down into subfolders
 set tabstop=2 " Make tabs as wide as two spaces
 set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches
 set incsearch " Search as characters are entered
 set showmatch " Show matching brackets when text indicator is over them
+set backupcopy=yes " Prevent VIM from renaming files
 
 " Visible whitespace prettier
 if &listchars ==# 'eol:$'
@@ -109,6 +111,12 @@ inoremap jk <ESC>
 noremap Q <NOP>
 " switch between current and last buffer
 nmap <leader>. <c-^>
+" next quicklist result
+nnoremap ]q :cnext<CR>
+" previuos quicklist result
+nnoremap [q :cprev<CR>
+" kill all open buffers
+nnoremap <leader>bd :bufdo bdelete<CR>
 
 " Quick panel navigation
 nnoremap <C-h> <C-w>h
@@ -126,6 +134,9 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " }}}
 
 " FOLDING {{{
@@ -134,6 +145,14 @@ set foldenable " Enable folding
 set foldlevelstart=10 " Open most folds by default
 set foldnestmax=10 " 10 nested fold max
 set foldmethod=indent " Fold based on indent level
+
+" }}}
+
+" SILVER SEARCHER {{{
+
+" bind \ (backward slash) to grep shortcut
+nnoremap \ :Ag<SPACE>
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 " }}}
 
