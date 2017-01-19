@@ -11,9 +11,9 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-sort-motion'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'kien/ctrlp.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-commentary'
@@ -22,6 +22,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Chiel92/vim-autoformat'
 
 " Language-specific plugin
 Plugin 'ap/vim-css-color'
@@ -35,9 +36,10 @@ Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'othree/yajs.vim'
+Plugin 'pangloss/vim-javascript'
 Plugin 'rstacruz/sparkup'
-Plugin 'scrooloose/syntastic'
-call vundle#end() 
+Plugin 'vim-syntastic/syntastic'
+call vundle#end()
 
 " }}}
 
@@ -51,6 +53,8 @@ let g:ctrlp_working_path_mode = 'ra'
 " Vim Indent Guides
 let g:indent_guides_auto_colors=0
 let g:indent_guides_enable_on_vim_startup=1
+set ts=2
+set sw=2 et
 
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
@@ -59,6 +63,12 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
 let g:airline_theme='powerlineish'
 let g:airline_powerline_fonts=1
 let g:airline_skip_empty_sections=1
+
+" Syntastic
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Editorconfig
+let g:EditorConfig_exec_path = '~/.editorconfig'
 
 " }}}
 
