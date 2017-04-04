@@ -69,6 +69,7 @@ install_apps() {
     install_package "Gnome Screensaver" "gnome-screensaver"
     install_package "VLC" "vlc"
     install_package "xclip" "xclip"
+    install_package "ZSH" "zsh"
 
 }
 
