@@ -252,19 +252,6 @@ main() {
     ./install/main.sh
     ./preferences/main.sh
 
-    # Install oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-    # Copies custom theme to oh-my-zsh folder
-    theme="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )/zsh/theme/"
-    themes="$HOME/.oh-my-zsh/themes/"
-
-    find "${theme}" -name "*.zsh-theme" | while read -r file
-    do
-        cp "${file}" "${themes}"
-    done
-
-    print_result $? "Copied oh-my-zsh custom theme" "true"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -284,8 +271,30 @@ main() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Install oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    # Copies custom theme to oh-my-zsh folder
+    theme="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )/zsh/theme/"
+    themes="$HOME/.oh-my-zsh/themes/"
+
+    find "${theme}" -name "*.zsh-theme" | while read -r file
+    do
+        cp "${file}" "${themes}"
+    done
+
+    print_result $? "Copied oh-my-zsh custom theme" "true"
+
+    # Ask to restart
     if ! $skipQuestions; then
-        ./restart.sh
+      print_in_purple "\n • Restart\n\n"
+
+      ask_for_confirmation "Do you want to restart?"
+      printf "\n"
+
+      if answer_is_yes; then
+          sudo shutdown -r now &> /dev/null
+      fi
     fi
 
 }

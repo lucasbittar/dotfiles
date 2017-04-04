@@ -5,14 +5,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-copy_custom_theme() {
-
-  print_in_purple "\n • Copy custom ZSH theme to proper folder\n\n"
-  source ../zsh/zsh_theme
-  print_success ".zsh-theme file copied!"
-
-}
-
 create_symlinks() {
 
     declare -a FILES_TO_SYMLINK=(
