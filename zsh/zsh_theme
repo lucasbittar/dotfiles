@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Copies custom theme to oh-my-zsh folder
+
+theme="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/theme"
+themes="$HOME/.oh-my-zsh/themes/"
+
+find "${theme}" -name "*.zsh-theme" | while read -r file
+do
+    mv "${file}" "${themes}"
+done
