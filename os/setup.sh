@@ -246,13 +246,25 @@ main() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Install oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     ./create_directories.sh
     ./symlink_setup.sh "$@"
     ./install/main.sh
     ./preferences/main.sh
+
+    # Install oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    # Copies custom theme to oh-my-zsh folder
+    theme="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )/zsh/theme/"
+    themes="$HOME/.oh-my-zsh/themes/"
+
+    find "${theme}" -name "*.zsh-theme" | while read -r file
+    do
+        cp "${file}" "${themes}"
+    done
+
+    print_result $? "Copied oh-my-zsh custom theme" "true"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

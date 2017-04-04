@@ -22,7 +22,6 @@ create_symlinks() {
         "shell/bash_prompt"
         "shell/bashrc"
 
-        "zsh/zsh_theme"
         "zsh/zshrc"
 
         "git/gitconfig"
