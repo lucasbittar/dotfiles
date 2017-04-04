@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Easier navigation: .., ..., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+###
+
+# Git
+alias push="git push"
+alias gp="git pull"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gstp="git subtree push --prefix"
+alias gl="git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
+alias master="git checkout master"
+alias dev="git checkout develop"
+###
+
+# Shortcuts
+alias g="git"
+alias v="vim"
+alias c="clear"
+alias ctags="`brew --prefix`/bin/ctags"
+alias rm="rm -rf --"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+###
+
+### Project specific
+alias rsync-mirelz="sudo rsync -r --progress /Users/lucasbittar/Projects/Rainier/server/src/main/webapp/resources /Users/lucasbittar/.homebrew/Cellar/tomcat7/7.0.69/libexec//webapps/server"
+
+# Make Grunt print stack traces by default
+command -v grunt > /dev/null && alias grunt="grunt --stack"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
+
+# Load OS specific aliases.
+. "aliases/$OS/aliases"
