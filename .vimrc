@@ -7,6 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Utilities
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
@@ -22,7 +23,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Chiel92/vim-autoformat'
 
 " Language-specific plugin
 Plugin 'ap/vim-css-color'
@@ -33,6 +33,7 @@ Plugin 'gavocanov/vim-js-indent'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mattn/emmet-vim'
+Plugin 'mxw/vim-jsx'
 Plugin 'othree/html5.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'othree/yajs.vim'
@@ -69,6 +70,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " Editorconfig
 let g:EditorConfig_exec_path = '~/.editorconfig'
+
+" JSX
+" Allow JSX in normal JS files
+let g:jsx_ext_required = 0
 
 " }}}
 
@@ -144,8 +149,11 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" Start search command
+nnoremap \ :Search<CR>
+
+" Search word under cursor
+nnoremap K :silent grep <cword> \| copen<CR><C-l>
 
 " }}}
 
@@ -160,9 +168,26 @@ set foldmethod=indent " Fold based on indent level
 
 " SILVER SEARCHER {{{
 
-" bind \ (backward slash) to grep shortcut
-nnoremap \ :Ag<SPACE>
-" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+  set grepformat^=%f:%l:%c:%m   " file:line:column:message
+endif
+
+" }}}
+
+" FUNCTIONS {{{
+
+function! MySearch()
+  let grep_term = input("grep: ")
+  if !empty(grep_term)
+    execute 'silent grep' grep_term | copen
+  else
+    echo "Empty search term"
+  endif
+  redraw!
+endfunction
+
+command! Search call MySearch()
 
 " }}}
 
