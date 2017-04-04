@@ -66,6 +66,7 @@ install_apps() {
     install_package "ShellCheck" "shellcheck"
     install_package "tmux" "tmux"
     install_package "Transmission" "transmission"
+    install_package "Gnome Screensaver" "gnome-screensaver"
     install_package "VLC" "vlc"
     install_package "xclip" "xclip"
 
