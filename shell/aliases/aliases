@@ -24,7 +24,7 @@ alias dev="git checkout develop"
 alias g="git"
 alias v="vim"
 alias c="clear"
-alias ctags="`brew --prefix`/bin/ctags"
+# alias ctags="`brew --prefix`/bin/ctags"
 alias rm="rm -rf --"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 ###
@@ -39,4 +39,4 @@ command -v grunt > /dev/null && alias grunt="grunt --stack"
 alias reload="exec $SHELL -l"
 
 # Load OS specific aliases.
-. "aliases/$OS/aliases"
+source ~/Projects/dotfiles/shell/aliases/$OS/aliases
