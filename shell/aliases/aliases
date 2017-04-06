@@ -40,4 +40,18 @@ command -v grunt > /dev/null && alias grunt="grunt --stack"
 alias reload="exec $SHELL -l"
 
 # Load OS specific aliases.
-source ~/Projects/dotfiles/shell/aliases/$OS/aliases
+# source ~/Projects/dotfiles/shell/aliases/$OS/aliases
+
+local kernelName=""
+kernelName="$(uname -s)"
+
+if [[ $kernelName == "Darwin" ]];
+then
+  source ~/Projects/dotfiles/shell/aliases/macos/aliases
+fi
+
+if [[ $kernelName == "Linux" ]];
+then
+  source ~/Projects/dotfiles/shell/aliases/ubuntu/aliases
+fi
+
