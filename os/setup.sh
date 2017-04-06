@@ -272,16 +272,17 @@ main() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Install oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    print_in_purple "\n • Installing oh-my-zsh\n\n"
+
+    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+    print_result $? "oh-my-zsh installed" "true"
 
     # Copies custom theme to oh-my-zsh folder
-    theme="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )/zsh/theme/"
-    themes="$HOME/.oh-my-zsh/themes/"
+    cp ~/Projects/dotfiles/zsh/theme/lucasbittar.zsh-theme ~/.oh-my-zsh/themes/
 
-    find "${theme}" -name "*.zsh-theme" | while read -r file
-    do
-        cp "${file}" "${themes}"
-    done
+    # Define oh-my-zsh as default shell
+    chsh -s /bin/zsh
 
     print_result $? "Copied oh-my-zsh custom theme" "true"
 
