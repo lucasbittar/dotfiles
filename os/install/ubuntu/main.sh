@@ -61,15 +61,16 @@ install_apps() {
     install_package "Flash" "flashplugin-installer"
     install_package "GIMP" "gimp"
     install_package "Git" "git"
-    install_package "vim" "vim"
-    install_package "ImageMagick" "imagemagick"
-    install_package "ShellCheck" "shellcheck"
-    install_package "tmux" "tmux"
-    install_package "Transmission" "transmission"
     install_package "Gnome Screensaver" "gnome-screensaver"
+    install_package "ImageMagick" "imagemagick"
+    install_package "Hack Font" "fonts-hack-ttf"
+    install_package "ShellCheck" "shellcheck"
+    install_package "Transmission" "transmission"
     install_package "VLC" "vlc"
-    install_package "xclip" "xclip"
     install_package "ZSH" "zsh"
+    install_package "tmux" "tmux"
+    install_package "vim" "vim"
+    install_package "xclip" "xclip"
 
 }
 
