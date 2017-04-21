@@ -95,6 +95,8 @@ install_apps() {
     install_package "Hack Font" "fonts-hack-ttf"
     install_package "ImageMagick" "imagemagick"
     install_package "NeoFetch" "neofetch"
+    install_package "Numix Icons" "numix-icon-theme"
+    install_package "Numix Theme" "numix-gtk-theme"
     install_package "ShellCheck" "shellcheck"
     install_package "Slim Login Manager" "slim"
     install_package "Transmission" "transmission"
