@@ -6,6 +6,34 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+install_termite() {
+
+    git clone --recursive https://github.com/thestinger/termite.git
+    git clone https://github.com/thestinger/vte-ng.git
+    sudo apt-get install -y \
+        g++ \
+        libgtk-3-dev \
+        gtk-doc-tools \
+        gnutls-bin \
+        valac \
+        intltool \
+        libpcre2-dev \
+        libglib3.0-cil-dev \
+        libgnutls28-dev \
+        libgirepository1.0-dev \
+        libxml2-utils \
+        gperf
+
+    echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
+    cd vte-ng && ./autogen.sh && make && sudo make install
+    cd ../termite && make && sudo make install
+    sudo ldconfig
+    sudo mkdir -p /lib/terminfo/x; sudo ln -s \
+    /usr/local/share/terminfo/x/xterm-termite \
+    /lib/terminfo/x/xterm-termite
+
+}
+
 install_apps() {
 
     # Install tools for compiling/building software from source.
@@ -57,20 +85,29 @@ install_apps() {
 
     fi
 
+    install_package "Compton" "compton"
+    install_package "Feh" "feh"
     install_package "Firefox Nightly" "firefox-trunk"
     install_package "Flash" "flashplugin-installer"
     install_package "GIMP" "gimp"
     install_package "Git" "git"
     install_package "Gnome Screensaver" "gnome-screensaver"
-    install_package "ImageMagick" "imagemagick"
     install_package "Hack Font" "fonts-hack-ttf"
+    install_package "ImageMagick" "imagemagick"
+    install_package "NeoFetch" "neofetch"
     install_package "ShellCheck" "shellcheck"
+    install_package "Slim Login Manager" "slim"
     install_package "Transmission" "transmission"
+    install_package "Tree" "tree"
     install_package "VLC" "vlc"
     install_package "ZSH" "zsh"
+    install_package "i3 Blocks" "i3blocks"
+    install_package "i3 WM" "i3"
     install_package "tmux" "tmux"
     install_package "vim" "vim"
     install_package "xclip" "xclip"
+
+    install_termite
 
 }
 
