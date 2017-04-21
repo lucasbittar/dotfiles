@@ -13,6 +13,9 @@ alias aptu="sudo apt-get update \
 # Empty trash.
 alias empty-trash="rm -rf ~/.local/share/Trash/files/*"
 
+# Copy command for tmux
+alias tmux-copy="xclip -sel clip -i"
+
 # Hide/Show desktop icons.
 alias hide-desktop-icons="gsettings set org.gnome.desktop.background show-desktop-icons false"
 alias show-desktop-icons="gsettings set org.gnome.desktop.background show-desktop-icons true"
@@ -24,6 +27,12 @@ alias u="sudo apt-get update \
             && npm upgrade -g"
 
 # Restart Network Conections (Wifi)
-alias restartwifi="sudo service network-manager restart"
-alias connectvpn="nmcli con up id VPN\ IR"
+###
+
+# Wifi related aliases
+alias wifi-on="nmcli radio wifi on"
+alias wifi-off="nmcli radio wifi off"
+alias wifi-list="nmcli d wifi list"
+alias wifi-restart="sudo service network-manager restart"
+alias wifi-connect="nmcli d wifi connect"
 ###

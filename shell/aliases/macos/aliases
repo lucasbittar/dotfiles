@@ -14,6 +14,9 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
+# Copy command for tmux
+alias tmux-copy="pbcopy -in -selection clipboard"
+
 # Clear DNS cache.
 alias clear-dns-cache="sudo dscacheutil -flushcache; \
                        sudo killall -HUP mDNSResponder"
