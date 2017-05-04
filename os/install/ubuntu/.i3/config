@@ -32,10 +32,10 @@ hide_edge_borders both
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-set $term termite 
+set $term termite
 
 # start a terminal
-bindsym $mod+Return exec $term 
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -140,7 +140,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-exec --no-startup-id $term --name=popup -e "tmux new-session -s Scratchpad" 
+exec --no-startup-id $term --name=popup -e "tmux new-session -s Scratchpad"
 for_window [instance="popup"] floating enable;
 for_window [instance="popup"] move scratchpad; [instance="popup"] scratchpad show; move scratchpad
 
@@ -220,7 +220,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Set wallpaper
 exec_always feh --bg-scale ~/Pictures/wallpaper.jpg
- 
+
 # Bind to lock screen
 bindsym $mod+shift+x exec i3lock
 
@@ -229,3 +229,5 @@ exec_always setxkbmap -option ctrl:swapcaps # Swap ctrl key with caps lock
 
 # Start compton to enable opacity and transition effect
 exec --no-startup-id compton -f
+exec --no-startup-id nm-applet
+exec --no-startup-id dropbox start
