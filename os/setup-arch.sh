@@ -188,7 +188,7 @@ main() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ./symlink_setup.sh "$@"
+    ./symlink_setup_arch.sh "$@"
     # ./install/main.sh
     # ./preferences/main.sh
 
@@ -200,6 +200,11 @@ main() {
             ./initialize_git_repository.sh "$DOTFILES_ORIGIN"
         fi
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        if ! $skipQuestions; then
+            ./update_content.sh
+        fi
 
     fi
 
