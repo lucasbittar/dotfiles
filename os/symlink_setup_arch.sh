@@ -24,36 +24,35 @@ create_symlinks() {
 
         "vim/vimrc"
 
+        "os/install/linux/gtkrc-2.0"
+
     )
 
     local i=""
     local sourceFile=""
     local targetFile=""
-    local configDir="/home/lucasbittar/Project/dotfiles/os/install/linux"
+    local configDir="/home/lucasbittar/Projects/dotfiles/os/install/linux"
     local skipQuestions=false
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     print_in_purple "\n • Create symbolic links under .config folder\n\n"
 
-    ln -fs $configDir/.config/i3 ~/.config/i3
-    print_success "$configDir/.config/i3 → ~/.config/i3"
+    ln -fs $configDir/.config/i3 /home/lucasbittar/.config/i3-test
+    print_success "/home/lucasbittar/.config/i3 → $configDir/.config/i3"
 
-    ln -fs $configDir/.config/polybar ~/.config/polybar
-    print_success "$configDir/.config/polybar → ~/.config/polybar"
+    ln -fs $configDir/.config/polybar /home/lucasbittar/.config/polybar-test
+    print_success "/home/lucasbittar/.config/polybar → $configDir/.config/polybar"
 
-    ln -fs $configDir/.config/termite ~/.config/termite
-    print_success "$configDir/.config/termite → ~/.config/termite"
-
-    ln -fs $configDir/.gtkrc-2.0 ~/.gtkrc-2.0
-    print_success "$configDir/.gtkrc-2.0 → ~/.gtkrc-2.0"
+    ln -fs $configDir/.config/termite /home/lucasbittar/.config/termite-test
+    print_success "/home/lucasbittar/.config/termite → $configDir/.config/termite"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     print_in_purple "\n • Create symbolic links under .fonts folder\n\n"
 
-    ln -fs $configDir/.fonts ~/.fonts
-    print_success "$configDir/.fonts → ~/.fonts"
+    ln -fs $configDir/.fonts /home/lucasbittar/.fonts-test
+    print_success "/home/lucasbittar/.fonts → $configDir/.fonts"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -61,6 +60,8 @@ create_symlinks() {
         && skipQuestions=true
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    print_in_purple "\n • Create symbolic default symlinks\n\n"
 
     for i in "${FILES_TO_SYMLINK[@]}"; do
 
