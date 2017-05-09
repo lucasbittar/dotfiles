@@ -189,8 +189,7 @@ main() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     ./symlink_setup_arch.sh "$@"
-    # ./install/main.sh
-    # ./preferences/main.sh
+    ./install/main_arch.sh
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
