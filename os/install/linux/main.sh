@@ -27,6 +27,7 @@ install_apps() {
     install_package "Pulse Audio Alsa" "pulseaudio-alsa"
     install_package "Pulse Audio" "pulseaudio"
     install_package "Rofi" "rofi"
+    install_package "OpenSSH" "openssh"
     install_package "Rsync" "rsync"
     install_package "ScreenFetch" "screenfetch"
     install_package "Scrot" "scrot"
