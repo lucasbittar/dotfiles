@@ -215,7 +215,7 @@ syntax on " Enable syntax highlight
 
 " Set theme
 set t_Co=256
-" colorscheme Benokai
+colorscheme Benokai
 highlight Normal term=bold cterm=NONE ctermfg=white ctermbg=NONE
 
 set laststatus=2 " Show status line
