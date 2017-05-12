@@ -188,8 +188,27 @@ main() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Install Packer
+    print_in_purple "\n • Installing Packer\n\n"
+
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/packer.tar.gz
+    tar -xvzf packer.tar.gz
+    cd packer
+    makepkg --noconfirm -si
+    cd ..
+    rm -rf packer/
+    rm packer.tar.gz
+
+    print_result $? "Packer installed" "true"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     ./symlink_setup_arch.sh "$@"
     ./install/main_arch.sh
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    print_in_purple "\n • Enable Network Manager\n\n"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
