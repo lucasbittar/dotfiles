@@ -210,6 +210,9 @@ main() {
 
     print_in_purple "\n • Enable Network Manager\n\n"
 
+    systemctl enable NetworkManager
+    systemctl start NetworkManager
+
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if cmd_exists "git"; then
