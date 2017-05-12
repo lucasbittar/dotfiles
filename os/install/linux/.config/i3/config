@@ -230,7 +230,7 @@ exec_always feh --bg-scale ~/Pictures/wallpaper.jpg
 bindsym $mod+shift+x exec i3lock
 
 # Keys remaping
-# exec_always setxkbmap -option ctrl:swapcaps # Swap ctrl key with caps lock
+exec_always setxkbmap -option ctrl:swapcaps # Swap ctrl key with caps lock
 
 # Start compton to enable opacity and transition effect
 exec --no-startup-id compton -f
