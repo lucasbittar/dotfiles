@@ -38,20 +38,20 @@ create_symlinks() {
 
     print_in_purple "\n • Create symbolic links under .config folder\n\n"
 
-    ln -fs $configDir/.config/i3 /home/lucasbittar/.config/i3-test
+    ln -fs $configDir/.config/i3 /home/lucasbittar/.config/i3
     print_success "/home/lucasbittar/.config/i3 → $configDir/.config/i3"
 
-    ln -fs $configDir/.config/polybar /home/lucasbittar/.config/polybar-test
+    ln -fs $configDir/.config/polybar /home/lucasbittar/.config/polybar
     print_success "/home/lucasbittar/.config/polybar → $configDir/.config/polybar"
 
-    ln -fs $configDir/.config/termite /home/lucasbittar/.config/termite-test
+    ln -fs $configDir/.config/termite /home/lucasbittar/.config/termite
     print_success "/home/lucasbittar/.config/termite → $configDir/.config/termite"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     print_in_purple "\n • Create symbolic links under .fonts folder\n\n"
 
-    ln -fs $configDir/.fonts /home/lucasbittar/.fonts-test
+    ln -fs $configDir/.fonts /home/lucasbittar/.fonts
     print_success "/home/lucasbittar/.fonts → $configDir/.fonts"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
