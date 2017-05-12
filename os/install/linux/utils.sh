@@ -18,16 +18,6 @@ install_package() {
           echo "Installing with packer"
           packer -S --noconfirm --noedit  $package
 
-        elif pacman -Qi pacaur &> /dev/null; then
-
-          echo "Installing with pacaur"
-          pacaur -S --noconfirm --noedit  $package
-
-        elif pacman -Qi yaourt &> /dev/null; then
-
-          echo "Installing with yaourt"
-          yaourt -S --noconfirm $package
-
         fi
 
     else
