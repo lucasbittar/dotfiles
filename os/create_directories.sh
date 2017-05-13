@@ -9,6 +9,8 @@ create_directories() {
 
     declare -a DIRECTORIES=(
         "$HOME/Downloads/torrents"
+        "$HOME/Projects"
+        "$HOME/Pictures"
     )
 
     for i in "${DIRECTORIES[@]}"; do

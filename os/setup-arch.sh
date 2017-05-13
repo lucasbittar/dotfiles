@@ -203,6 +203,7 @@ main() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    ./create_directories.sh
     ./symlink_setup_arch.sh "$@"
     ./install/main_arch.sh
 
@@ -245,6 +246,11 @@ main() {
     chsh -s /bin/zsh
 
     print_result $? "Copied oh-my-zsh custom theme" "true"
+
+    # Copies wallpaper to Pictures folder
+    cp ~/Projects/dotfiles/wallpaper.jpg ~/Pictures/
+
+    print_result $? "Copied wallpaper" "true"
 
     # Ask to restart
     if ! $skipQuestions; then
