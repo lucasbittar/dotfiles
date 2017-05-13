@@ -216,6 +216,16 @@ main() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    print_in_purple "\n • Installing Vundle and VIM plugins\n\n"
+
+    git clone git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+    vim +PluginInstall +qall
+
+    print_result $? "Vundle and VIM plugins installed" "true"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     if cmd_exists "git"; then
 
         if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then

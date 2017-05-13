@@ -10,4 +10,3 @@ print_in_purple "\n • Installs\n\n"
 "./$(get_os)/main.sh"
 ./nvm.sh
 ./npm.sh
-./vim.sh
