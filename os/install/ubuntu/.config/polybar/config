@@ -43,8 +43,8 @@ padding-right = 5
 module-margin-left = 3
 module-margin-right = 3
 
-font-0 = System San Francisco Display:pixelsize=10
-font-1 = fontawesome-webfont:fontformat=truetype:size=10
+font-0 = SFNS Text:fontformat=truetype:size=11
+font-1 = FontAwesome:fontformat=truetype:size=10
 
 modules-left = i3 bspwm xwindow
 modules-center = memory temperature cpu xbacklight xkeyboard
