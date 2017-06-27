@@ -13,6 +13,7 @@ install_apps() {
     install_package "Dropbox" "dropbox"
     install_package "Feh" "feh"
     install_package "Firefox Nightly" "firefox-trunk"
+    install_package "Franz" "franz-bin"
     install_package "GIMP" "gimp"
     install_package "Git" "git"
     install_package "Google Chrome" "google-chrome"
