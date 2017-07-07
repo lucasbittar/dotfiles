@@ -14,6 +14,7 @@ alias gc="git commit -m"
 alias uc="git reset HEAD~"
 alias gstp="git subtree push --prefix"
 alias gl="git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
+alias glf="git log --follow -p"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
