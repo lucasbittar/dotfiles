@@ -119,6 +119,8 @@ endif
 
 " KEY REMAPING {{{
 
+" Edit vimrc file
+nmap <leader>ev :e $MYVIMRC<CR>
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 " Space opens/closes folds
