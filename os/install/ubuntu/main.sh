@@ -105,7 +105,6 @@ install_apps() {
     install_package "Tree" "tree"
     install_package "VLC" "vlc"
     install_package "Wget" "wget"
-    install_package "ZSH" "zsh"
     install_package "Zoom" "zoom"
     install_package "cURL" "curl"
     install_package "i3 Blocks" "i3blocks"
@@ -113,6 +112,7 @@ install_apps() {
     install_package "tmux" "tmux"
     install_package "vim" "vim"
     install_package "xclip" "xclip"
+    install_package "zsh" "zsh"
     install_package "zsh-completions" "zsh-completions"
     install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"
 
