@@ -121,6 +121,8 @@ endif
 
 " Edit vimrc file
 nmap <leader>ev :e $MYVIMRC<CR>
+" Remap backtick marker
+" nnoremap " `
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 " Space opens/closes folds
