@@ -110,24 +110,14 @@ install_apps() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     install_package "Numix Theme" "numix-gtk-theme"
-    install_package "OpenSSH" "openssh"
     install_package "ScreenFetch" "screenfetch"
     install_package "ShellCheck" "shellcheck"
-
-    # Install Skype
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    install_package "apt-transport-https" "apt-transport-https"
-    add_key "https://repo.skype.com/data/SKYPE-GPG-KEY"
-    add_to_source_list "https://repo.skype.com/deb stable main" "skypeforlinux.list"
-    update
-    install_package "Skype" "skypeforlinux"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
     add_to_source_list "http://repository.spotify.com stable non-free" "spotify.list"
-    update 
+    update
     install_package "Spotify" "spotify-client"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
