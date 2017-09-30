@@ -4,6 +4,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
     && . "../../utils.sh" \
     && . "utils.sh"
 
+    OSarchitecture="$(uname -i)"
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 install_termite() {
@@ -57,66 +59,112 @@ install_apps() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    if ! package_is_installed "google-chrome-unstable"; then
-
-        add_key "https://dl-ssl.google.com/linux/linux_signing_key.pub" \
-            || print_error "Chrome Canary (add key)"
-
-        add_to_source_list "[arch=amd64] https://dl.google.com/linux/deb/ stable main" "google-chrome.list" \
-            || print_error "Chrome Canary (add to package resource list)"
-
-        update &> /dev/null \
-            || print_error "Chrome Canary (resync package index files)"
-
-    fi
-
-    install_package "Chrome Canary" "google-chrome-unstable"
     install_package "cURL" "curl"
+
+    # Install Chrome Stable on 64bits and Chromium on 32bit architeture
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    if [ "$OSarchitecture" == "x86_64" ]; then
+	add_to_source_list "[arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google.list"
+        add_key "https://dl.google.com/linux/linux_signing_key.pub"
+        update
+        install_package "google-chrome-stable"
+    else
+        install_package "Chromium Browser" "chromium-browser"
+    fi
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    if ! package_is_installed "firefox-trunk"; then
+    install_package "Dropbox" "nautilus-dropbox"
 
-        add_ppa "ubuntu-mozilla-daily/ppa" \
-            || print_error "Firefox Nightly (add PPA)"
+    # Install Franz
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        update &> /dev/null \
-            || print_error "Firefox Nightly (resync package index files)"
-
+    if [ "$OSarchitecture" == "x86_64" ]; then
+        wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-x64-4.0.4.tgz -O $HOME/Downloads/franz.tgz
+    else
+        wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-ia32-4.0.4.tgz -O $HOME/Downloads/franz.tgz
     fi
 
-    install_package "Compton" "compton"
-    install_package "Dropbox" "dropbox"
-    install_package "Feh" "feh"
-    install_package "Firefox Nightly" "firefox-trunk"
-    install_package "Franz" "franz-bin"
+    cd /opt
+    sudo mkdir franz
+    cd /opt/franz
+    sudo mv $HOME/Downloads/franz.tgz .
+    sudo tar -xvf franz.tgz
+    ./Franz 
+    print_result "Franz"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     install_package "GIMP" "gimp"
     install_package "Git" "git"
     install_package "Hack Font" "fonts-hack-ttf"
     install_package "ImageMagick" "imagemagick"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    add_ppa "numix/ppa"
+    update
     install_package "Numix Icons" "numix-icon-theme"
+    install_package "Numix Icons Circle" "numix-icon-theme-circle"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     install_package "Numix Theme" "numix-gtk-theme"
     install_package "OpenSSH" "openssh"
     install_package "ScreenFetch" "screenfetch"
     install_package "ShellCheck" "shellcheck"
-    install_package "Skype" "skype"
-    install_package "Spotify" "spotify"
-    install_package "Transmission" "transmission"
+
+    # Install Skype
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    install_package "apt-transport-https" "apt-transport-https"
+    add_key "https://repo.skype.com/data/SKYPE-GPG-KEY"
+    add_to_source_list "https://repo.skype.com/deb stable main" "skypeforlinux.list"
+    update
+    install_package "Skype" "skypeforlinux"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+    add_to_source_list "http://repository.spotify.com stable non-free" "spotify.list"
+    update 
+    install_package "Spotify" "spotify-client"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    add_ppa "transmissionbt/ppa"
+    update
+    install_package "Transmission" "transmission transmission-qt"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     install_package "Tree" "tree"
     install_package "VLC" "vlc"
     install_package "Wget" "wget"
-    install_package "Zoom" "zoom"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    if [ "$OSarchitecture" == "x86_64" ]; then
+        wget https://zoom.us/client/latest/zoom_amd64.deb -O $HOME/Downloads/zoom.deb
+    else
+        wget https://zoom.us/client/latest/zoom_i386.deb -O $HOME/Downloads/zoom.deb
+    fi
+
+    dpkg -i ~/Downloads/zoom.deb
+
+    print_result "Zoom"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     install_package "cURL" "curl"
-    install_package "i3 Blocks" "i3blocks"
-    install_package "i3 WM" "i3"
     install_package "tmux" "tmux"
     install_package "vim" "vim"
     install_package "xclip" "xclip"
     install_package "zsh" "zsh"
-    install_package "zsh-completions" "zsh-completions"
     install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"
 
-    install_termite
+    #install_termite
 
 }
 
