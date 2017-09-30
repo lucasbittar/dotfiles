@@ -91,7 +91,6 @@ install_apps() {
     cd /opt/franz
     sudo mv $HOME/Downloads/franz.tgz .
     sudo tar -xvf franz.tgz
-    ./Franz 
     print_result "Franz"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -151,7 +150,7 @@ install_apps() {
         wget https://zoom.us/client/latest/zoom_i386.deb -O $HOME/Downloads/zoom.deb
     fi
 
-    dpkg -i ~/Downloads/zoom.deb
+    sudo dpkg -i ~/Downloads/zoom.deb
 
     print_result "Zoom"
 
@@ -173,7 +172,7 @@ main() {
     print_in_purple "   Apps and CLI tools\n\n"
 
     update
-    upgrade
+    # upgrade
     printf "\n"
     install_apps
     printf "\n"
