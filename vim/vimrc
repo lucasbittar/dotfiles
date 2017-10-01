@@ -87,7 +87,15 @@ set nocompatible " Use vim features
 set encoding=utf-8 " Set encoding
 set history=5000 " Increase command line history
 let mapleader="," " Set leader key to ,
-set clipboard=unnamed " Use OS clipboard by default
+
+if system('uname -s') == "Darwin\n"
+  "OSX
+  set clipboard=unnamed " Use OS clipboard by default
+else
+  "Linux
+  set clipboard=unnamedplus " Use UNIX clipboard by default
+endif
+
 set autoindent " Copy indent to the new line
 set wildmenu " Enhance command-line completion
 set path+=** " Search down into subfolders
