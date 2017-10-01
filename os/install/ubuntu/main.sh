@@ -131,7 +131,7 @@ install_apps() {
 
     install_package "cURL" "curl"
     install_package "tmux" "tmux"
-    install_package "vim" "vim"
+    install_package "vim" "vim-gnome"
     install_package "xclip" "xclip"
     install_package "zsh" "zsh"
     install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"
