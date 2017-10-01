@@ -65,7 +65,7 @@ install_apps() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if [ "$OSarchitecture" == "x86_64" ]; then
-	add_to_source_list "[arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google.list"
+      	add_to_source_list "[arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google.list"
         add_key "https://dl.google.com/linux/linux_signing_key.pub"
         update
         install_package "google-chrome-stable"
@@ -76,6 +76,16 @@ install_apps() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     install_package "Dropbox" "nautilus-dropbox"
+
+    # Install Cerebro (64 bit only)
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    if [ "$OSarchitecture" == "x86_64" ]; then
+        wget https://github.com/KELiON/cerebro/releases/download/v0.3.1/cerebro_0.3.1_amd64.deb -O $HOME/Downloads/cerebro.deb
+        sudo dpkg -i $HOME/Downloads/cerebro.deb
+        sudo apt-get install -f
+        print_result "Cerebro"
+    fi
 
     # Install Franz
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
