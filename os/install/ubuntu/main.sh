@@ -38,6 +38,12 @@ install_termite() {
 
 install_apps() {
 
+    # Installs apt-fast for faster package installation
+
+    add_ppa "saiarcot895/myppa"
+    update
+    sudo apt-get -y install apt-fast
+
     # Install tools for compiling/building software from source.
 
     install_package "Build Essential" "build-essential"
@@ -86,11 +92,6 @@ install_apps() {
         print_result "Cerebro"
     fi
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    add_ppa "saiarcot895/myppa"
-    update
-    install_package "Apt Fast" "apt-fast"
 
     # Install Franz
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
