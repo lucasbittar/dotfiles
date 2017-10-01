@@ -147,6 +147,8 @@ install_apps() {
 
     install_package "Tree" "tree"
     install_package "VLC" "vlc"
+    install_package "Vagrant" "vagrant"
+    install_package "VirtualBox" "virtualbox virtualbox-ext-pack"
     install_package "Wget" "wget"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
