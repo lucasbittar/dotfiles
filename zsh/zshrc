@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # My own custom theme.
 ZSH_THEME="lucasbittar"
 
-plugins=(sublime z)
+plugins=(sublime z vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
