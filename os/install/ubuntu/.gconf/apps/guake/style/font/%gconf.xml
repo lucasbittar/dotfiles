@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="color" mtime="1506873885" type="string">
+		<stringvalue>#fefefffff6f6</stringvalue>
+	</entry>
+	<entry name="style" mtime="1506873783" type="string">
+		<stringvalue>Hack 10</stringvalue>
+	</entry>
+	<entry name="palette_name" mtime="1506874246" type="string">
+		<stringvalue>Custom</stringvalue>
+	</entry>
+	<entry name="palette" mtime="1506874246" type="string">
+		<stringvalue>#191919191919:#ffff1c1c6d6d:#b3b3e4e43a3a:#ececdada7373:#00009494d9d9:#fefe43438686:#5050b7b7d9d9:#686868686868:#555555555555:#fafa27277272:#9191e2e27272:#fffff2f27f7f:#0000bebeffff:#aeae8282ffff:#5353d7d7ffff:#ffffffffffff:#fefefffff6f6:#0a0a0a0a0a0a</stringvalue>
+	</entry>
+	<entry name="allow_bold" mtime="1506873672" type="bool" value="true"/>
+</gconf>
