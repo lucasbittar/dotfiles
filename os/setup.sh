@@ -249,7 +249,7 @@ main() {
 
     ./create_directories.sh
     ./symlink_setup.sh "$@"
-    ./install/main.sh
+    # ./install/main.sh
     ./preferences/main.sh
 
 
