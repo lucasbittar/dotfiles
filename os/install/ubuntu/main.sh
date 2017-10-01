@@ -65,10 +65,9 @@ install_apps() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if [ "$OSarchitecture" == "x86_64" ]; then
-      	add_to_source_list "[arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google.list"
-        add_key "https://dl.google.com/linux/linux_signing_key.pub"
-        update
-        install_package "google-chrome-stable"
+        install_package "gdebi" "gdebi"
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/Downloads/chrome.deb
+        sudo gdebi $HOME/Downloads/chrome.deb
     else
         install_package "Chromium Browser" "chromium-browser"
     fi
