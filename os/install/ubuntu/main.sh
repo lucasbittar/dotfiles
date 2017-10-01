@@ -86,6 +86,12 @@ install_apps() {
         print_result "Cerebro"
     fi
 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    add_ppa "saiarcot895/myppa"
+    update
+    install_package "Apt Fast" "apt-fast"
+
     # Install Franz
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
