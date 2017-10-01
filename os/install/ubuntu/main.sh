@@ -106,6 +106,7 @@ install_apps() {
 
     install_package "GIMP" "gimp"
     install_package "Git" "git"
+    install_package "Guake" "guake"
     install_package "Hack Font" "fonts-hack-ttf"
     install_package "ImageMagick" "imagemagick"
 
