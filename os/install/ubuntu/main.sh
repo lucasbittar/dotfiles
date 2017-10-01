@@ -8,41 +8,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_termite() {
-
-    git clone --recursive https://github.com/thestinger/termite.git
-    git clone https://github.com/thestinger/vte-ng.git
-    sudo apt-get install -y \
-        g++ \
-        libgtk-3-dev \
-        gtk-doc-tools \
-        gnutls-bin \
-        valac \
-        intltool \
-        libpcre2-dev \
-        libglib3.0-cil-dev \
-        libgnutls28-dev \
-        libgirepository1.0-dev \
-        libxml2-utils \
-        gperf
-
-    echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
-    cd vte-ng && ./autogen.sh && make && sudo make install
-    cd ../termite && make && sudo make install
-    sudo ldconfig
-    sudo mkdir -p /lib/terminfo/x; sudo ln -s \
-    /usr/local/share/terminfo/x/xterm-termite \
-    /lib/terminfo/x/xterm-termite
-
-}
-
 install_apps() {
-
-    # Installs apt-fast for faster package installation
-
-    add_ppa "saiarcot895/myppa"
-    update
-    sudo apt-get -y install apt-fast
 
     # Install tools for compiling/building software from source.
 
@@ -68,7 +34,6 @@ install_apps() {
     install_package "cURL" "curl"
 
     # Install Chrome Stable on 64bits and Chromium on 32bit architeture
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if [ "$OSarchitecture" == "x86_64" ]; then
         install_package "gdebi" "gdebi"
@@ -83,7 +48,6 @@ install_apps() {
     install_package "Dropbox" "nautilus-dropbox"
 
     # Install Cerebro (64 bit only)
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if [ "$OSarchitecture" == "x86_64" ]; then
         wget https://github.com/KELiON/cerebro/releases/download/v0.3.1/cerebro_0.3.1_amd64.deb -O $HOME/Downloads/cerebro.deb
@@ -94,7 +58,6 @@ install_apps() {
 
 
     # Install Franz
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     if [ "$OSarchitecture" == "x86_64" ]; then
         wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-x64-4.0.4.tgz -O $HOME/Downloads/franz.tgz
@@ -173,13 +136,21 @@ install_apps() {
     install_package "zsh" "zsh"
     install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"
 
-    #install_termite
-
 }
 
 main() {
 
     print_in_purple "   Apps and CLI tools\n\n"
+
+    # Installs apt-fast for faster package installation
+
+    add_ppa "saiarcot895/myppa"
+    update
+    sudo apt-get -y install apt-fast
+    print_result "APT-FAST"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
     update
     # upgrade
