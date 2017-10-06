@@ -92,6 +92,7 @@ install_apps() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     install_package "Numix Theme" "numix-gtk-theme"
+    install_package "Preload" "preload"
     install_package "ScreenFetch" "screenfetch"
     install_package "ShellCheck" "shellcheck"
 
