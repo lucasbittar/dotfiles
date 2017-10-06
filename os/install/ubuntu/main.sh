@@ -31,6 +31,8 @@ install_apps() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # Resolves Magic Mouse pairing issues
+    install_package "Blueman" "blueman"
     install_package "cURL" "curl"
 
     # Install Chrome Stable on 64bits and Chromium on 32bit architeture
