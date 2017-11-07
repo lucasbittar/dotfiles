@@ -43,6 +43,7 @@ install_apps() {
     brew_install "Skype" "skype" "caskroom/cask" "cask"
     brew_install "Spectacle" "spectacle" "caskroom/cask" "cask"
     brew_install "TeamViewer" "teamviewer" "caskroom/cask" "cask"
+    brew_install "The Unarchiver" "the-unarchiver" "caskroom/cask" "cask"
     brew_install "Vagrant" "vagrant" "caskroom/cask" "cask"
     brew_install "VirtualBox" "virtualbox" "caskroom/cask" "cask"
     brew_install "Spotify" "spotify" "caskroom/cask" "cask"
