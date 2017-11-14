@@ -162,10 +162,12 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # defaults write com.apple.finder FXArrangeGroupViewBy = Name;
 # defaults write com.apple.finder FXMyDocumentsArrangeGroupViewBy = "Date Last Opened";
 
-# Use list view in all Finder windows by default
+# Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-# defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+# Arrange by kind
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy kind" ~/Library/Preferences/com.apple.finder.plist
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
