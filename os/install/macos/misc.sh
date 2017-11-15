@@ -13,6 +13,7 @@ install_apps() {
     brew_install "Core Utils" "coreutils"
     brew_install "FFmpeg" "ffmpeg"
     brew_install "Git" "git"
+    brew_install "Htop" "htop"
     brew_install "ImageMagick" "imagemagick --with-webp"
     brew_install "More Utils" "moreutils"
     brew_install "NeoFetch" "neofetch"
