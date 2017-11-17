@@ -8,3 +8,4 @@ oh-my-zsh/
 
 # Dotfiles (synced via Dropbox)
 .z
+.zsh_history
