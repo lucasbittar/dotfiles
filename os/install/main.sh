@@ -11,14 +11,6 @@ print_in_purple "\n • Installs\n\n"
 ./nvm.sh
 ./npm.sh
 
-print_in_purple "\n   Vim Plugins\n\n"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-vim +PluginInstall +qall
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 print_in_purple "\n   ZSH Plugins\n\n"
@@ -29,5 +21,14 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/p
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+print_in_purple "\n   Vim Plugins\n\n"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+vim +PluginInstall +qall
+
 
 printf "\n"

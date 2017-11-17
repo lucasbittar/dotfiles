@@ -5,3 +5,7 @@ oh-my-zsh/
 # Vim swap
 *.swp
 *.swo
+
+# Dotfiles (synced via Dropbox)
+.z
+.zsh_history
