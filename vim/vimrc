@@ -21,6 +21,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-vinegar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -169,6 +170,9 @@ nnoremap \ :Search<CR>
 
 " Search word under cursor
 nnoremap K :silent grep <cword> \| copen<CR><C-l>
+
+" Search and replace binding
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " }}}
 
