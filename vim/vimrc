@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Utilities
-Plugin 'Chiel92/vim-autoformat'
+" Plugin 'Chiel92/vim-autoformat'
 Plugin 'Raimondi/delimitMate'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
@@ -24,6 +24,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'w0rp/ale'
 
 " Language-specific plugin
 Plugin 'ap/vim-css-color'
@@ -40,7 +41,7 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'othree/yajs.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rstacruz/sparkup'
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 call vundle#end()
 
 " }}}
@@ -68,12 +69,19 @@ let g:airline_skip_empty_sections=1
 
 " Syntastic
 " let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_checkers = ['standard']
-autocmd bufwritepost *.js silent !standard --fix %
-set autoread
+" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+
+" autocmd bufwritepost *.js silent !eslint --fix %
+" set autoread
+" let g:syntastic_javascript_checkers = ['standard']
 
 " Editorconfig
 let g:EditorConfig_exec_path = '~/.editorconfig'
+
+" Ale
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " JSX
 " Allow JSX in normal JS files
