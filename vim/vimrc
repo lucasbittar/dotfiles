@@ -138,24 +138,29 @@ set complete=.,b,u,]
 
 " Edit vimrc file
 nmap <leader>ev :e $MYVIMRC<CR>
-" Remap backtick marker
-nnoremap " `
+" switch between current and last buffer
+nmap <leader>. <c-^>
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
+" kill all open buffers
+nnoremap <leader>bd :bufdo bdelete<CR>
+" Start search command
+nnoremap <Leader>s :Search<CR>
+" Search and replace binding
+nnoremap <Leader>sr :%s/\<<C-r><C-w>\>/
+
+" Remap backtick marker
+nnoremap " `
 " Space opens/closes folds
 nnoremap <space> za
 " Replace ESC key
 inoremap jk <ESC>
 " disable Ex mode
 noremap Q <NOP>
-" switch between current and last buffer
-nmap <leader>. <c-^>
 " next quicklist result
 nnoremap ]q :cnext<CR>
 " previuos quicklist result
 nnoremap [q :cprev<CR>
-" kill all open buffers
-nnoremap <leader>bd :bufdo bdelete<CR>
 " Avoid unintentional switches to Ex mode.
 nmap Q q
 " Multi-mode mappings (Normal, Visual, Operating-pending modes).
@@ -187,11 +192,6 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" Start search command
-nnoremap \ :Search<CR>
-
-" Search and replace binding
-nnoremap <Leader>sr :%s/\<<C-r><C-w>\>/
 
 " }}}
 
@@ -216,7 +216,7 @@ endif
 " FUNCTIONS {{{
 
 function! MySearch()
-  let grep_term = input("grep: ")
+  let grep_term = input("⦿ Search for: ")
   if !empty(grep_term)
     execute 'silent grep' grep_term | copen
   else
