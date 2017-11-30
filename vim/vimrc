@@ -265,9 +265,8 @@ set showbreak=↪\
 set listchars=tab:┊\ ,eol:¬,nbsp:␣,trail:·,extends:»,precedes:«,nbsp:×
 
 "Invisible character colors
-" hi NonText ctermfg=236
-" hi SpecialKey ctermfg=236
-" hi SpecialKey ctermfg=grey guifg=grey70
+hi NonText ctermfg=238
+hi SpecialKey ctermfg=238
 
 " Hightlight line color
 hi CursorLine cterm=NONE ctermbg=234
