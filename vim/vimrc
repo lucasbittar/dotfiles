@@ -55,7 +55,8 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=232
 
 " Vim Airline
-let g:airline_theme='minimalist'
+" Top picks: angr, dark, dark_minimal, durant, minimalist, onedark, ravenpower, term
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts=1
 let g:airline_skip_empty_sections=1
 
