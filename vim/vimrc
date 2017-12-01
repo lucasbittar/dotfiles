@@ -142,7 +142,7 @@ nmap <leader>ev :e $MYVIMRC<CR>
 " switch between current and last buffer
 nmap <leader>. <c-^>
 " Turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR><CR>
+nnoremap <leader><space> :nohlsearch<CR><CR>:<backspace>
 " kill all open buffers
 nnoremap <leader>bd :bufdo bdelete<CR>
 " Start search command
