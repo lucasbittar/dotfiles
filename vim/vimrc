@@ -7,14 +7,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Utilities
-" Plugin 'Chiel92/vim-autoformat'
 Plugin 'Raimondi/delimitMate'
+Plugin 'SirVer/ultisnips'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-commentary'
@@ -141,13 +142,15 @@ nmap <leader>ev :e $MYVIMRC<CR>
 " switch between current and last buffer
 nmap <leader>. <c-^>
 " Turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader><space> :nohlsearch<CR><CR>
 " kill all open buffers
 nnoremap <leader>bd :bufdo bdelete<CR>
 " Start search command
 nnoremap <Leader>s :Search<CR>
 " Search and replace binding
 nnoremap <Leader>sr :%s/\<<C-r><C-w>\>/
+" Edit file, starting in same directory as current file.
+nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 
 " Remap backtick marker
 nnoremap " `
@@ -270,6 +273,9 @@ hi SpecialKey ctermfg=238
 
 " Hightlight line color
 hi CursorLine cterm=NONE ctermbg=234
+
+" Hightlight search result
+hi Search ctermbg=NONE ctermfg=red
 
 hi TabLineFill ctermfg=231 ctermbg=16
 hi TabLine ctermfg=250 ctermbg=16
