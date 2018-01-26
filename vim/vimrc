@@ -140,6 +140,9 @@ set incsearch " Search as characters are entered
 set showmatch " Show matching brackets when text indicator is over them
 set backupcopy=yes " Prevent VIM from renaming files
 
+" Searching for slash as normal text
+command! -nargs=1 Ss let @/ = <q-args>|set hlsearch
+
 " No sound errors
 set noerrorbells
 set novisualbell
