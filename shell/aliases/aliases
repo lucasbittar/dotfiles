@@ -14,6 +14,7 @@ alias gc="git commit -m"
 alias uc="git reset HEAD~"
 alias gstp="git subtree push --prefix"
 alias gl="git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
+alias glv="git log | vim -R -" # Populates Vim with git log where I can go to specific hash by pressing <K>
 alias glf="git log --follow -p"
 alias gco="git checkout"
 alias gcb="git checkout -b"
