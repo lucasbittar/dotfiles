@@ -80,9 +80,6 @@ let g:ale_fixers = {
 \  'css': [
 \    'prettier'
 \  ],
-\  'html': [
-\    'htmlhint'
-\  ],
 \}
 " Do not lint or fix minified files.
 let g:ale_pattern_options = {
@@ -269,7 +266,7 @@ set shiftround " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
 
 " Defines indentation for HTML files
-autocmd FileType html setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2
 
 " }}}
 
