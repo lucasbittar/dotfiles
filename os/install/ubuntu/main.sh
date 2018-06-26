@@ -37,13 +37,15 @@ install_apps() {
 
     # Install Chrome Stable on 64bits and Chromium on 32bit architeture
 
-    if [ "$OSarchitecture" == "x86_64" ]; then
-        install_package "gdebi" "gdebi"
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/Downloads/chrome.deb
-        sudo gdebi $HOME/Downloads/chrome.deb
-    else
-        install_package "Chromium Browser" "chromium-browser"
-    fi
+    # if [ "$OSarchitecture" == "x86_64" ]; then
+    #     install_package "gdebi" "gdebi"
+    #     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/Downloads/chrome.deb
+    #     sudo gdebi $HOME/Downloads/chrome.deb
+    # else
+    #     install_package "Chromium Browser" "chromium-browser"
+    # fi
+
+    install_package "Chromium Browser" "chromium-browser"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -76,11 +78,9 @@ install_apps() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    install_package "GIMP" "gimp"
     install_package "Git" "git"
     install_package "Guake" "guake"
     install_package "Hack Font" "fonts-hack-ttf"
-    install_package "ImageMagick" "imagemagick"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -119,17 +119,17 @@ install_apps() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    if [ "$OSarchitecture" == "x86_64" ]; then
-        wget https://zoom.us/client/latest/zoom_amd64.deb -O $HOME/Downloads/zoom.deb
-    else
-        wget https://zoom.us/client/latest/zoom_i386.deb -O $HOME/Downloads/zoom.deb
-    fi
+    # if [ "$OSarchitecture" == "x86_64" ]; then
+    #     wget https://zoom.us/client/latest/zoom_amd64.deb -O $HOME/Downloads/zoom.deb
+    # else
+    #     wget https://zoom.us/client/latest/zoom_i386.deb -O $HOME/Downloads/zoom.deb
+    # fi
 
-    sudo dpkg -i ~/Downloads/zoom.deb
+    # sudo dpkg -i ~/Downloads/zoom.deb
 
-    print_result "Zoom"
+    # print_result "Zoom"
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     install_package "cURL" "curl"
     install_package "tmux" "tmux"
@@ -146,7 +146,7 @@ main() {
 
     # Installs apt-fast for faster package installation
 
-    add_ppa "saiarcot895/myppa"
+    add_ppa "apt-fast/stable"
     update
     sudo apt-get -y install apt-fast
     print_result "APT-FAST"
