@@ -11,7 +11,7 @@ alias gp="git pull"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
-alias uc="git reset HEAD~"
+alias gce="git commit --amend"
 alias gstp="git subtree push --prefix"
 alias gl="git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
 alias glv="git log | vim -R -" # Populates Vim with git log where I can go to specific hash by pressing <K>
@@ -19,10 +19,19 @@ alias glf="git log --follow -p"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias nah="git reset --hard;git clean -df;"
+alias undocommit="git reset HEAD~"
 alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
 alias master="git checkout master && git pull"
-alias dev="git checkout develop"
+alias dev="git checkout develop && git pull"
 ###
+
+# Tmuxinator
+alias tx="tmuxinator"
+alias txs="tmuxinator start"
+alias txe="tmuxinator edit"
+
+#Python
+# alias python="python3"
 
 # Shortcuts
 alias g="git"

@@ -18,6 +18,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'honza/vim-snippets'
+Plugin 'junegunn/fzf.vim'
 Plugin 'rstacruz/sparkup'
 Plugin 'sickill/vim-pasta'
 Plugin 'tpope/vim-commentary'
@@ -31,9 +32,11 @@ Plugin 'w0rp/ale'
 
 " Language-specific plugin
 Plugin 'elzr/vim-json'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'othree/yajs.vim'
+Plugin 'posva/vim-vue'
 call vundle#end()
 
 " }}}
@@ -48,6 +51,9 @@ call vundle#end()
 
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=232
+
+" Setup FZF
+set rtp+=/usr/local/opt/fzf
 
 " indentLine
 let g:indentLine_enabled = 1
@@ -174,7 +180,6 @@ nnoremap <Leader>s :Search<CR>
 nnoremap <Leader>sr :%s/\<<C-r><C-w>\>/
 " Edit file, starting in same directory as current file.
 nnoremap <Leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
-
 " Remap backtick marker
 nnoremap " `
 " Space opens/closes folds
@@ -191,6 +196,12 @@ nnoremap [q :cprev<CR>
 nmap Q q
 " Multi-mode mappings (Normal, Visual, Operating-pending modes).
 noremap Y y$
+" Project finder
+nmap <Leader>a :Ag<Space>
+" Buffer finder
+nmap <Leader>b :Buffers<CR>
+" Files finder
+nmap <Leader>f :Files<CR>
 
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
@@ -252,6 +263,38 @@ function! MySearch()
 endfunction
 
 command! Search call MySearch()
+
+function! RangeChooser()
+    let temp = tempname()
+    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+    " with ranger 1.4.2 through 1.5.0 instead.
+    "exec 'silent !ranger --choosefile=' . shellescape(temp)
+    if has("gui_running")
+        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
+    else
+        exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    endif
+    if !filereadable(temp)
+        redraw!
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        redraw!
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+    redraw!
+endfunction
+command! -bar RangerChooser call RangeChooser()
+nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " }}}
 
