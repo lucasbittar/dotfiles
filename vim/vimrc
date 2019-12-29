@@ -83,6 +83,9 @@ let g:ale_fixers = {
 \  'scss': [
 \    'prettier'
 \  ],
+\  'liquid': [
+\    'prettier'
+\  ],
 \  'css': [
 \    'prettier'
 \  ],
@@ -142,6 +145,7 @@ set ignorecase " Ignore case of searches
 set incsearch " Search as characters are entered
 set showmatch " Show matching brackets when text indicator is over them
 set backupcopy=yes " Prevent VIM from renaming files
+set scrolloff=5 " Offset top and bottom lines
 
 " Searching for slash as normal text
 command! -nargs=1 Ss let @/ = <q-args>|set hlsearch

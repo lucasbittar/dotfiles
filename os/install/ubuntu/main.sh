@@ -63,18 +63,18 @@ install_apps() {
 
     # Install Franz
 
-    if [ "$OSarchitecture" == "x86_64" ]; then
-        wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-x64-4.0.4.tgz -O $HOME/Downloads/franz.tgz
-    else
-        wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-ia32-4.0.4.tgz -O $HOME/Downloads/franz.tgz
-    fi
+    # if [ "$OSarchitecture" == "x86_64" ]; then
+    #     wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-x64-4.0.4.tgz -O $HOME/Downloads/franz.tgz
+    # else
+    #     wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-ia32-4.0.4.tgz -O $HOME/Downloads/franz.tgz
+    # fi
 
-    cd /opt
-    sudo mkdir franz
-    cd /opt/franz
-    sudo mv $HOME/Downloads/franz.tgz .
-    sudo tar -xvf franz.tgz
-    print_result "Franz"
+    # cd /opt
+    # sudo mkdir franz
+    # cd /opt/franz
+    # sudo mv $HOME/Downloads/franz.tgz .
+    # sudo tar -xvf franz.tgz
+    # print_result "Franz"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -134,6 +134,7 @@ install_apps() {
     install_package "cURL" "curl"
     install_package "tmux" "tmux"
     install_package "vim" "vim-gnome"
+    install_package "nvim" "neovim"
     install_package "xclip" "xclip"
     install_package "zsh" "zsh"
     install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"
