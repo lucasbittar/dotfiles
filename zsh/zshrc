@@ -35,9 +35,9 @@ export KEYTIMEOUT=1
 tmux=$(tmux ls)
 
 if [[ $tmux == *"Home"* ]]; then
-  echo "It's there!"
   tmux attach-session -t Home
+  clear
 else
-  echo "Nop, creating one right now!"
   tmux new -s Home
+  clear
 fi
