@@ -31,5 +31,13 @@ source ~/Projects/dotfiles/shell/bash_profile
 # VI mode
 export KEYTIMEOUT=1
 
-tmux attach-session -t Home
-tmux new -s Home
+# Checks if session home exists, if so attach it, if not create one
+tmux=$(tmux ls)
+
+if [[ $tmux == *"Home"* ]]; then
+  echo "It's there!"
+  tmux attach-session -t Home
+else
+  echo "Nop, creating one right now!"
+  tmux new -s Home
+fi
