@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Easier navigation: .., ..., ~ and -
+cd() { builtin cd "$@"; ll; } # Always list directory contents upon 'cd'
 alias ..="cd .."
 alias ...="cd ../.."
 ###
@@ -12,13 +13,14 @@ alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
 alias gce="git commit --amend"
+alias gd="git diff"
 alias gstp="git subtree push --prefix"
 alias gl="git log --graph --pretty=format:'%C(blue)%h%C(red)%d %C(green)%ar %C(white)%s %C(yellow)(%an)' --abbrev-commit --date=relative"
 alias glv="git log | vim -R -" # Populates Vim with git log where I can go to specific hash by pressing <K>
 alias glf="git log --follow -p"
 alias gco="git checkout"
 alias gcb="git checkout -b"
-alias gcf="git checkout --track $(git branch -r | fzf)"
+gcl() { git checkout --track $(git branch -r | fzf) } # Lists all branchs available to checkout
 alias nah="git reset --hard;git clean -df;"
 alias undocommit="git reset HEAD~"
 alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
@@ -44,18 +46,46 @@ alias rm="rm -rf --"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 ###
 
+### Functions
+
+# Search for a file using MacOS Spotlight's metadata
+spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
+
+# Extract most know archives with one command
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+          esac
+      else
+          echo "'$1' is not a valid file"
+      fi
+}
+
+# List processes owned by my user
+my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+
 ### Project specific
-alias rsync-mirelz="sudo rsync -r --progress /Users/lucasbittar/Projects/Rainier/server/src/main/webapp/resources /Users/lucasbittar/.homebrew/Cellar/tomcat7/7.0.69/libexec//webapps/server"
+# alias rsync-mirelz="sudo rsync -r --progress /Users/lucasbittar/Projects/Rainier/server/src/main/webapp/resources /Users/lucasbittar/.homebrew/Cellar/tomcat7/7.0.69/libexec//webapps/server"
 
 # Make Grunt print stack traces by default
-command -v grunt > /dev/null && alias grunt="grunt --stack"
+# command -v grunt > /dev/null && alias grunt="grunt --stack"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
 # Load OS specific aliases.
-# source ~/Projects/dotfiles/shell/aliases/$OS/aliases
-
 local kernelName=""
 kernelName="$(uname -s)"
 
@@ -68,4 +98,3 @@ if [[ $kernelName == "Linux" ]];
 then
   source ~/Projects/dotfiles/shell/aliases/ubuntu/aliases
 fi
-

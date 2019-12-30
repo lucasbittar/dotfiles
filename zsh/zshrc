@@ -31,4 +31,5 @@ source ~/Projects/dotfiles/shell/bash_profile
 # VI mode
 export KEYTIMEOUT=1
 
+tmux attach-session -t Home
 tmux new -s Home
