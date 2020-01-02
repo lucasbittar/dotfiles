@@ -34,6 +34,10 @@
     editor = vim
     excludesfile = ~/.gitignore
 
+[alias]
+    in = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' ..@{u})
+    out = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' @{u}..)
+
 [diff "bin"]
 
     # Use `hexdump` to diff binary files
