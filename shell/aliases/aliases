@@ -26,6 +26,7 @@ alias nah="git reset --hard;git clean -df;"
 alias undocommit="git reset HEAD~"
 alias undopush="git push -f origin HEAD^:master" # Undo a `git push`
 alias master="git checkout master && git pull"
+alias prod="git checkout production && git pull"
 alias dev="git checkout develop && git pull"
 ###
 
