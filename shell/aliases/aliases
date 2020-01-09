@@ -81,12 +81,6 @@ extract () {
 # List processes owned by my user
 my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 
-### Project specific
-# alias rsync-mirelz="sudo rsync -r --progress /Users/lucasbittar/Projects/Rainier/server/src/main/webapp/resources /Users/lucasbittar/.homebrew/Cellar/tomcat7/7.0.69/libexec//webapps/server"
-
-# Make Grunt print stack traces by default
-# command -v grunt > /dev/null && alias grunt="grunt --stack"
-
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
