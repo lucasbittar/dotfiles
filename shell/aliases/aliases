@@ -30,13 +30,16 @@ alias prod="git checkout production && git pull"
 alias dev="git checkout develop && git pull"
 ###
 
+# Tmux
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"
+
 # Tmuxinator
 alias tx="tmuxinator"
-alias txs="tmuxinator start"
-alias txe="tmuxinator edit"
-
-#Python
-# alias python="python3"
+alias txs="tx start"
+alias txe="tx edit"
 
 # Shortcuts
 alias g="git"
