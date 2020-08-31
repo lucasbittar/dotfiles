@@ -30,12 +30,6 @@ alias prod="git checkout production && git pull"
 alias dev="git checkout develop && git pull"
 ###
 
-# Tmux
-alias t="tmux"
-alias ta="t a -t"
-alias tls="t ls"
-alias tn="t new -t"
-
 # Tmuxinator
 alias tx="tmuxinator"
 alias txs="tx start"
@@ -49,7 +43,30 @@ alias c="clear"
 alias ctags="`brew --prefix`/bin/ctags"
 alias rm="rm -rf --"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias top="vtop --theme wizard"
 ###
+
+# FZF
+# Modified version where you can press - CTRL-O to open with `open` command, - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+  local out file key
+  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+# tm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
+# Running `tm` will let you fuzzy-find a session mame
+# Passing an argument to `ftm` will switch to that session if it exists or create it otherwise
+ftm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
 
 ### Functions
 
