@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Easier navigation: .., ..., ~ and -
-cd() { builtin cd "$@"; ll; } # Always list directory contents upon 'cd'
+# cd() { builtin cd "$@"; ll; } # Always list directory contents upon 'cd'
 alias ..="cd .."
 alias ...="cd ../.."
 ###

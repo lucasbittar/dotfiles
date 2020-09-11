@@ -31,11 +31,11 @@ export PATH=$HOME/.homebrew/bin:$PATH
 # FZF Setup
 # Set fzf installation directory path
 FD_OPTIONS="--hidden --exclude .git --exclude node_modules"
-# Setting rg as the default source for fzf
+# Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND="fd $FD_OPTIONS"
 
 export FZF_BASE=/usr/local/opt/fzf
-export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --multi --inline-info"
+export FZF_DEFAULT_OPTS="--reverse --no-mouse --height 50% -1 --multi --inline-info"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always {} | head -500'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_R_OPTS="--sort --exact"
