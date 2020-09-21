@@ -8,7 +8,7 @@ declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSIT
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-declare dotfilesDirectory="$HOME/Projects/dotfiles"
+declare dotfilesDirectory="$HOME/Code/dotfiles"
 declare skipQuestions=false
 
 # ----------------------------------------------------------------------
@@ -248,7 +248,6 @@ main() {
 
 
     ./create_directories.sh
-    ./symlink_setup.sh "$@"
     ./install/main.sh
     ./preferences/main.sh
 
@@ -278,13 +277,8 @@ main() {
 
     print_result $? "oh-my-zsh installed" "true"
 
-    # Copies custom theme to oh-my-zsh folder
-    cp ~/Projects/dotfiles/zsh/theme/lucasbittar.zsh-theme ~/.oh-my-zsh/themes/
-
     # Define oh-my-zsh as default shell
     chsh -s /bin/zsh
-
-    print_result $? "Copied oh-my-zsh custom theme" "true"
 
     # Ask to restart
     if ! $skipQuestions; then
