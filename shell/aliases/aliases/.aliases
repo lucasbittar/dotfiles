@@ -107,10 +107,10 @@ kernelName="$(uname -s)"
 
 if [[ $kernelName == "Darwin" ]];
 then
-  source ~/Projects/dotfiles/shell/aliases/macos/aliases
+  source ~/Code/dotfiles/shell/aliases/macos/aliases
 fi
 
 if [[ $kernelName == "Linux" ]];
 then
-  source ~/Projects/dotfiles/shell/aliases/ubuntu/aliases
+  source ~/Code/dotfiles/shell/aliases/ubuntu/aliases
 fi

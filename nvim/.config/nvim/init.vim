@@ -9,8 +9,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'elzr/vim-json'
-Plug 'gcorne/vim-sass-lint'
 Plug 'honza/vim-snippets'
 Plug 'jefflund/colorschemer'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -18,7 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree'
 Plug 'mxw/vim-jsx'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'rstacruz/sparkup'
@@ -28,7 +26,6 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -64,10 +61,6 @@ let g:airline_powerline_fonts=1
 let g:airline_skip_empty_sections=0
 let g:airline#extensions#coc#enabled = 1
 
-" Linter
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
-
 " Editorconfig
 let g:EditorConfig_exec_path = '~/.editorconfig'
 
@@ -75,8 +68,8 @@ let g:EditorConfig_exec_path = '~/.editorconfig'
 
 " DEFAULT SETTINGS {{{
 
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python2_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 filetype plugin on " Detect filetype
 let mapleader="," " Set leader key to ,

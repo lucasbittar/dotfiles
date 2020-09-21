@@ -1,6 +1,6 @@
 {
   "coc.preferences.colorSupport": true,
-  "coc.preferences.formatOnSaveFiletypes": [
+  "_coc.preferences.formatOnSaveFiletypes_": [
     "css",
     "html",
     "javascript",

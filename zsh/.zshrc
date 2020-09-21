@@ -1,18 +1,19 @@
 #!/bin/bash
 
 # Path to your oh-my-zsh installation.
-# export ZSH=~/Projects/dotfiles/oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
-export HISTFILE=$HOME/Dropbox/Code/dotfiles/.zsh_history
-export TERM="xterm-256color-italic"
+export HISTFILE=$HOME/.zsh_history
+export TERM="xterm-256color"
 export PATH="$(yarn global bin):$PATH"
 
 export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 
 HISTSIZE=10000
 SAVEHIST=10000
@@ -42,28 +43,33 @@ export FZF_CTRL_R_OPTS="--sort --exact"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
 export KEYTIMEOUT=1
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+ZSH_DISABLE_COMPFIX=true
+
+# Source files
+source ~/.aliases
+source ~/.extras
 
 source $ZSH/oh-my-zsh.sh
 
 # z
 source $ZSH/plugins/z/z.sh
 
-# Load default dotfiles
-source ~/Projects/dotfiles/shell/bash_profile
-
 # VI mode
 export KEYTIMEOUT=1
 
 # Checks if session home exists, if so attach it, if not create one
-tmux=$(tmux ls)
+# tmux=$(tmux ls)
 
-if [[ $tmux == *"Home"* ]]; then
-  tmux attach-session -t Home
-  clear
-else
-  tmux new -s Home
-  clear
-fi
+# if [[ $tmux == *"Home"* ]]; then
+#   tmux attach-session -t Home
+#   clear
+# else
+#   tmux new -s Home
+#   clear
+# fi
 
 ### Added by Zplugin's installer
 if [[ ! -d $HOME/.zplugin/bin ]]; then
