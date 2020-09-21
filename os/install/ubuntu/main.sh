@@ -22,84 +22,54 @@ install_apps() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Software which is not included by default
-    # in Ubuntu due to legal or copyright reasons.
+    install_package "cURL" "curl"
+    install_package "Wget" "wget"
 
-    #install_package "Ubuntu Restricted Extras" "ubuntu-restricted-extras"
+    # Install Chrome Stable
 
-    printf "\n"
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/Downloads/chrome.deb
+    sudo apt install $HOME/Downloads/chrome.deb
+    print_result "Google Chrome"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Resolves Magic Mouse pairing issues
-    install_package "Blueman" "blueman"
-    install_package "cURL" "curl"
+    # Install Ulauncher
 
-    # Install Chrome Stable on 64bits and Chromium on 32bit architeture
-
-    # if [ "$OSarchitecture" == "x86_64" ]; then
-    #     install_package "gdebi" "gdebi"
-    #     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O $HOME/Downloads/chrome.deb
-    #     sudo gdebi $HOME/Downloads/chrome.deb
-    # else
-    #     install_package "Chromium Browser" "chromium-browser"
-    # fi
-
-    install_package "Chromium Browser" "chromium-browser"
+    wget https://github.com/Ulauncher/Ulauncher/releases/download/5.8.0/ulauncher_5.8.0_all.deb -O $HOME/Downloads/ulauncher.deb
+    sudo apt install $HOME/Downloads/ulauncher.deb
+    print_result "Ulauncher"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     install_package "Dropbox" "nautilus-dropbox"
 
-    # Install Cerebro (64 bit only)
-
-    if [ "$OSarchitecture" == "x86_64" ]; then
-        wget https://github.com/KELiON/cerebro/releases/download/v0.3.1/cerebro_0.3.1_amd64.deb -O $HOME/Downloads/cerebro.deb
-        sudo dpkg -i $HOME/Downloads/cerebro.deb
-        sudo apt-get install -f
-        print_result "Cerebro"
-    fi
-
-
-    # Install Franz
-
-    # if [ "$OSarchitecture" == "x86_64" ]; then
-    #     wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-x64-4.0.4.tgz -O $HOME/Downloads/franz.tgz
-    # else
-    #     wget https://github.com/meetfranz/franz-app/releases/download/4.0.4/Franz-linux-ia32-4.0.4.tgz -O $HOME/Downloads/franz.tgz
-    # fi
-
-    # cd /opt
-    # sudo mkdir franz
-    # cd /opt/franz
-    # sudo mv $HOME/Downloads/franz.tgz .
-    # sudo tar -xvf franz.tgz
-    # print_result "Franz"
-
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     install_package "Git" "git"
     install_package "Guake" "guake"
-    install_package "Hack Font" "fonts-hack-ttf"
+    install_package "FD" "fd-find"
+    install_package "RG" "ripgrep"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    add_ppa "numix/ppa"
-    update
-    install_package "Numix Icons" "numix-icon-theme"
-    install_package "Numix Icons Circle" "numix-icon-theme-circle"
+    git clone https://github.com/vinceliuice/vimix-gtk-themes.git $HOME/Downloads/vimix-gtk-themes
+    ./$HOME/Downloads/vimix-gtk-themes/install.sh
+
+    git clone https://github.com/vinceliuice/vimix-icon-theme.git $HOME/Downloads/vimix-icon-theme
+    ./$HOME/Downloads/vimix-icon-theme/install.sh
+
+    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+    $HOME/.fzf/install
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    install_package "Numix Theme" "numix-gtk-theme"
-    install_package "Preload" "preload"
     install_package "ScreenFetch" "screenfetch"
-    install_package "ShellCheck" "shellcheck"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-    add_to_source_list "http://repository.spotify.com stable non-free" "spotify.list"
+    curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add -
+    curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
+    echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
     update
     install_package "Spotify" "spotify-client"
 
@@ -113,31 +83,20 @@ install_apps() {
 
     install_package "Tree" "tree"
     install_package "VLC" "vlc"
-    install_package "Vagrant" "vagrant"
-    install_package "VirtualBox" "virtualbox virtualbox-ext-pack"
-    install_package "Wget" "wget"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # if [ "$OSarchitecture" == "x86_64" ]; then
-    #     wget https://zoom.us/client/latest/zoom_amd64.deb -O $HOME/Downloads/zoom.deb
-    # else
-    #     wget https://zoom.us/client/latest/zoom_i386.deb -O $HOME/Downloads/zoom.deb
-    # fi
+    wget https://zoom.us/client/latest/zoom_amd64.deb -O $HOME/Downloads/zoom.deb
+    sudo dpkg -i $HOME/Downloads/zoom.deb
 
-    # sudo dpkg -i ~/Downloads/zoom.deb
-
-    # print_result "Zoom"
+    print_result "Zoom"
 
     # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    install_package "cURL" "curl"
     install_package "tmux" "tmux"
-    install_package "vim" "vim-gnome"
     install_package "nvim" "neovim"
     install_package "xclip" "xclip"
     install_package "zsh" "zsh"
-    install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"
 
 }
 
@@ -145,15 +104,7 @@ main() {
 
     print_in_purple "   Apps and CLI tools\n\n"
 
-    # Installs apt-fast for faster package installation
-
-    add_ppa "apt-fast/stable"
-    update
-    sudo apt-get -y install apt-fast
-    print_result "APT-FAST"
-
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 
     update
     # upgrade

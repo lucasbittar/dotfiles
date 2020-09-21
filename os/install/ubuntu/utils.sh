@@ -27,7 +27,7 @@ autoremove() {
     # dependencies for other packages and are no longer needed.
 
     execute \
-        "sudo apt-fast autoremove -qqy" \
+        "sudo apt autoremove -qqy" \
         "APT (autoremove)"
 
 }
@@ -38,7 +38,7 @@ install_package() {
     declare -r PACKAGE_READABLE_NAME="$1"
 
     if ! package_is_installed "$PACKAGE"; then
-        execute "sudo apt-fast install --allow-unauthenticated -qqy $PACKAGE" "$PACKAGE_READABLE_NAME"
+        execute "sudo apt install --allow-unauthenticated -qqy $PACKAGE" "$PACKAGE_READABLE_NAME"
         #                                      suppress output ─┘│
         #            assume "yes" as the answer to all prompts ──┘
     else
@@ -56,7 +56,7 @@ update() {
     # Resynchronize the package index files from their sources.
 
     execute \
-        "sudo apt-fast update -qqy" \
+        "sudo apt update -qqy" \
         "APT (update)"
 
 }
