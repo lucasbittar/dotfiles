@@ -5,7 +5,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-create_symlinks() {
+create_symlinks_old() {
 
     declare -a FILES_TO_SYMLINK=(
 
@@ -73,6 +73,15 @@ create_symlinks() {
         fi
 
     done
+
+}
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+create_symlinks() {
+
+    cd $HOME/Code/dotfiles
+    stow -vt $HOME git nvim tmux zsh
 
 }
 

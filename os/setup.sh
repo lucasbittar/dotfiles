@@ -250,6 +250,7 @@ main() {
     ./create_directories.sh
     ./install/main.sh
     ./preferences/main.sh
+    ./symlink_setup.sh
 
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
