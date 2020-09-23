@@ -4,10 +4,10 @@
 export ZSH=$HOME/.oh-my-zsh
 export HISTFILE=$HOME/.zsh_history
 export TERM="xterm-256color"
-export PATH="$(yarn global bin):$PATH"
 
 export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -61,15 +61,15 @@ source $ZSH/plugins/z/z.sh
 export KEYTIMEOUT=1
 
 # Checks if session home exists, if so attach it, if not create one
-# tmux=$(tmux ls)
+tmux=$(tmux ls)
 
-# if [[ $tmux == *"Home"* ]]; then
-#   tmux attach-session -t Home
-#   clear
-# else
-#   tmux new -s Home
-#   clear
-# fi
+if [[ $tmux == *"Home"* ]]; then
+  tmux attach-session -t Home
+  # clear
+else
+  tmux new -s Home
+  # clear
+fi
 
 ### Added by Zplugin's installer
 if [[ ! -d $HOME/.zplugin/bin ]]; then
