@@ -48,28 +48,29 @@ export EDITOR="$VISUAL"
 
 ZSH_DISABLE_COMPFIX=true
 
-# Source files
-source ~/.aliases
-source ~/.extras
-
 source $ZSH/oh-my-zsh.sh
 
 # z
 source $ZSH/plugins/z/z.sh
 
+# Source files
+source ~/.aliases
+source ~/.extras
+
+
 # VI mode
 export KEYTIMEOUT=1
 
 # Checks if session home exists, if so attach it, if not create one
-tmux=$(tmux ls)
+# tmux=$(tmux ls)
 
-if [[ $tmux == *"Home"* ]]; then
-  tmux attach-session -t Home
-  # clear
-else
-  tmux new -s Home
-  # clear
-fi
+# if [[ $tmux == *"Home"* ]]; then
+#   tmux attach-session -t Home
+#   # clear
+# else
+#   tmux new -s Home
+#   # clear
+# fi
 
 ### Added by Zplugin's installer
 if [[ ! -d $HOME/.zplugin/bin ]]; then
