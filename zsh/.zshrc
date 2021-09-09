@@ -23,7 +23,7 @@ SAVEHIST=10000
 ZSH_THEME="spaceship"
 
 # plugins=(sublime z vi-mode zsh-syntax-highlighting zsh-autosuggestions git-prompt tmux)
-plugins=(z vi-mode git-prompt tmux fzf)
+plugins=(z git-prompt vi-mode tmux fzf)
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -42,7 +42,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_R_OPTS="--sort --exact"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
-export KEYTIMEOUT=1
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
@@ -58,18 +57,24 @@ source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/z/z.sh
 
 # VI mode
+bindkey -v
 export KEYTIMEOUT=1
 
-# Checks if session home exists, if so attach it, if not create one
-# tmux=$(tmux ls)
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
 
-# if [[ $tmux == *"Home"* ]]; then
-#   tmux attach-session -t Home
-#   clear
-# else
-#   tmux new -s Home
-#   clear
-# fi
+zle -N zle-keymap-select
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
+}
+
+# define right prompt, regardless of whether the theme defined it
+RPS1='$(vi_mode_prompt_info)'
+RPS2=$RPS1
 
 ### Added by Zplugin's installer
 if [[ ! -d $HOME/.zplugin/bin ]]; then
@@ -97,7 +102,6 @@ SPACESHIP_PROMPT_ORDER=(
   node
   exec_time     # Execution time
   line_sep      # Line break
-  vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character

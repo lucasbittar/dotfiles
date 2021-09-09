@@ -31,6 +31,7 @@ install_apps() {
     brew_install "Chrome" "google-chrome" "caskroom/cask" "cask"
     brew_install "Docker" "docker" "caskroom/cask" "cask"
     brew_install "Dropbox" "dropbox" "caskroom/cask" "cask"
+    brew_install "Express VPN" "expressvpn" "caskroom/cask" "cask"
     brew_install "Fira Code" "font-fira-code" "caskroom/cask" "cask"
     brew_install "Firefox Nightly" "firefoxnightly" "caskroom/versions" "cask"
     brew_install "Firefox" "firefox" "caskroom/cask" "cask"

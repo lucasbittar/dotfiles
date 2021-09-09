@@ -9,6 +9,7 @@ Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'gcorne/vim-sass-lint'
 Plug 'honza/vim-snippets'
 Plug 'jefflund/colorschemer'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -26,6 +27,7 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -39,12 +41,27 @@ set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-v': 'vsplit' }
+
 " Hide statusline
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+
+" Syntastic
+let g:syntastic_sass_checkers=["sasslint"]
+let g:syntastic_scss_checkers=["sasslint"]
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -95,6 +112,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 set autoindent " Copy indent to the new line
 set backupcopy=yes " Prevent VIM from renaming files
 set colorcolumn=120
+set guicursor= " Keeps block cursor even in insert mode
 set hidden " Enables changing buffers without saving
 set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches
@@ -107,6 +125,7 @@ set nowritebackup
 set path+=** " Search down into subfolders
 set scrolloff=5 " Offset top and bottom lines
 set showmatch " Show matching brackets when text indicator is over them
+set signcolumn=yes " Adds extra column for symbols and stuff
 set smartcase
 set smartindent
 set undodir=~/.config/nvim/undodir
