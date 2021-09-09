@@ -12,7 +12,6 @@ understand [what it does](os/setup.sh). Seriously, **DON'T**!)
 | OS | Snippet |
 |:---|:---|
 | `macOS` | `bash -c "$(curl -LsS https://raw.github.com/lucasbittar/dotfiles/master/os/setup.sh)"` |
-| `Arch` | `bash -c "$(wget -qO https://raw.github.com/lucasbittar/dotfiles/master/os/setup-arch.sh)"` |
 | `Ubuntu` | `bash -c "$(wget -qO - https://raw.github.com/lucasbittar/dotfiles/master/os/setup.sh)"` |
 
 ## Acknowledgements
