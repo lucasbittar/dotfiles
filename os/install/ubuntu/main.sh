@@ -93,10 +93,13 @@ install_apps() {
 
     # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    install_package "tmux" "tmux"
+    install_package "cargo" "cargo"
     install_package "nvim" "neovim"
+    install_package "tmux" "tmux"
     install_package "xclip" "xclip"
     install_package "zsh" "zsh"
+
+    cargo install exa
 
 }
 

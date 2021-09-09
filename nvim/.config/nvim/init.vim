@@ -86,7 +86,6 @@ let g:EditorConfig_exec_path = '~/.editorconfig'
 " DEFAULT SETTINGS {{{
 
 let g:python2_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
 
 filetype plugin on " Detect filetype
 let mapleader="," " Set leader key to ,
@@ -101,9 +100,11 @@ let g:netrw_banner = 0
 if system('uname -s') == "Darwin\n"
   "OSX
   set clipboard=unnamed " Use OS clipboard by default
+  let g:python3_host_prog = '/usr/local/bin/python3'
 else
   "Linux
   set clipboard=unnamedplus " Use UNIX clipboard by default
+  let g:python3_host_prog = '/usr/bin/python3'
 endif
 
 " :Prettier to format current buffer

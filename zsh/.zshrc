@@ -4,10 +4,10 @@
 export ZSH=$HOME/.oh-my-zsh
 export HISTFILE=$HOME/.zsh_history
 export TERM="xterm-256color"
-export PATH="$(yarn global bin):$PATH"
 
 export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -47,14 +47,15 @@ export EDITOR="$VISUAL"
 
 ZSH_DISABLE_COMPFIX=true
 
-# Source files
-source ~/.aliases
-source ~/.extras
-
 source $ZSH/oh-my-zsh.sh
 
 # z
 source $ZSH/plugins/z/z.sh
+
+# Source files
+source ~/.aliases
+source ~/.extras
+
 
 # VI mode
 bindkey -v

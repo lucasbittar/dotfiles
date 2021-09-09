@@ -23,6 +23,7 @@ install_apps() {
     brew_install "Wget" "wget"
     brew_install "Z" "z"
     brew_install "ZSH" "zsh"
+    brew_install "exa" "exa"
     brew_install "tmux" "tmux"
 
     # Apps  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

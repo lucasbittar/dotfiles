@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Easier navigation: .., ..., ~ and -
-# cd() { builtin cd "$@"; ll; } # Always list directory contents upon 'cd'
 alias ..="cd .."
 alias ...="cd ../.."
 ###
+
+# List directories
+alias ll="exa -lh --color=always --group-directories-first"
+alias l="exa -lah --color=always --group-directories-first"
 
 # Git
 alias push="git push"
@@ -55,10 +58,14 @@ alias g="git"
 alias vim="nvim"
 alias v="nvim"
 alias c="clear"
-alias ctags="`brew --prefix`/bin/ctags"
 alias rm="rm -rf --"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias top="vtop --theme wizard"
+
+if [[ $kernelName == "Darwin" ]];
+then
+  alias ctags="`brew --prefix`/bin/ctags"
+fi
 ###
 
 # FZF
