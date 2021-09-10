@@ -4,7 +4,6 @@
 
 call plug#begin()
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
