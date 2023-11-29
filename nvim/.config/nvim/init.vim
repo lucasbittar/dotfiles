@@ -1,22 +1,36 @@
-" Lucas's .vimrc
+  " Lucas's .vimrc
 
 " PLUGINS {{{
 
 call plug#begin()
+" Plug 'David-Kunz/markid'
+" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'jefflund/colorschemer'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'onsails/lspkind.nvim'
+" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'folke/lsp-colors.nvim'
 Plug 'gcorne/vim-sass-lint'
 Plug 'honza/vim-snippets'
-Plug 'jefflund/colorschemer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'madox2/vim-ai'
 Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree'
 Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvimdev/lspsaga.nvim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'rstacruz/sparkup'
@@ -56,7 +70,7 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', '@yaegassy/coc-tailwindcss3', 'coc-prisma']
 
 " Syntastic
 let g:syntastic_sass_checkers=["sasslint"]
@@ -159,7 +173,7 @@ endif
 
 " Pulls completions from current file, other buffers (closed or still open),
 " and from the current tags file
-set complete=.,b,u,]
+" set complete=.,b,u,]
 
 " }}}
 
@@ -195,6 +209,8 @@ nnoremap <leader>bd :bufdo bdelete<CR>
 nnoremap <leader>sr :%s/\<<C-r><C-w>\>/
 " Edit file, starting in same directory as current file.
 nnoremap <leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
+" Preserve clipboard
+" xnoremap <leader>p \_dP
 " Toggle undotree
 nnoremap <leader>u :UndotreeToggle<CR>
 " Project finder
@@ -211,6 +227,8 @@ nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>/ :BLines<CR>
 " Snippets finder
 nnoremap <leader>s :Snippets<CR>
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 " gr - go to reference of word under cursor
 nmap <silent> gr <Plug>(coc-reference)
 " gd - go to definition of word under cursor
@@ -246,10 +264,10 @@ nnoremap <silent> <Left> :cpfile<CR>
 nnoremap <silent> <Right> :cnfile<CR>
 
 " Quick panel navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
@@ -301,6 +319,8 @@ autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2
 " VISUAL {{{
 
 syntax on " Enable syntax highlight
+
+let g:coc_default_semantic_highlight_groups = 1
 
 " Set theme
 set t_Co=256

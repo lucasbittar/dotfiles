@@ -1,14 +1,6 @@
 {
   "coc.preferences.colorSupport": true,
-  "_coc.preferences.formatOnSaveFiletypes_": [
-    "css",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "liquid",
-    "scss"
-  ],
+  "coc.preferences.formatOnSave": false,
   "diagnostic.errorSign": "✖",
   "diagnostic.infoSign": "◆",
   "diagnostic.warningSign": "!",
@@ -25,5 +17,6 @@
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enable": true,
   "prettier.eslintIntegration": true,
-  "tslint.jsEnable": true
+  "tslint.jsEnable": true,
+  "typescript.preferences.includePackageJsonAutoImports": ["on"]
 }
