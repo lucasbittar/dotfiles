@@ -4,8 +4,8 @@
   "diagnostic.errorSign": "✖",
   "diagnostic.infoSign": "◆",
   "diagnostic.warningSign": "!",
-  "highlight.document.enable": false,
   "highlight.colors.enable": true,
+  "highlight.document.enable": false,
   "html.enable": true,
   "html.filetypes": ["html", "liquid"],
   "html.format.enable": true,
@@ -17,6 +17,10 @@
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enable": true,
   "prettier.eslintIntegration": true,
+  "python.jediEnabled": true,
   "tslint.jsEnable": true,
-  "typescript.preferences.includePackageJsonAutoImports": ["on"]
+  "typescript.preferences.includePackageJsonAutoImports": [
+    "on"
+  ],
+  "snippets.ultisnips.pythonPrompt": false,
 }

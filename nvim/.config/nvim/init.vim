@@ -3,37 +3,19 @@
 " PLUGINS {{{
 
 call plug#begin()
-" Plug 'David-Kunz/markid'
-" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'jefflund/colorschemer'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'onsails/lspkind.nvim'
-" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'folke/lsp-colors.nvim'
 Plug 'gcorne/vim-sass-lint'
-Plug 'honza/vim-snippets'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
-Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree'
 Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvimdev/lspsaga.nvim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
-Plug 'rstacruz/sparkup'
 Plug 'scrooloose/syntastic'
 Plug 'sickill/vim-pasta'
 Plug 'stsewd/fzf-checkout.vim'
@@ -70,14 +52,11 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-snippets', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', '@yaegassy/coc-tailwindcss3', 'coc-prisma']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
 
 " Syntastic
 let g:syntastic_sass_checkers=["sasslint"]
 let g:syntastic_scss_checkers=["sasslint"]
-
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<tab>"
 
 " indentLine
 let g:indentLine_enabled = 1
@@ -98,7 +77,7 @@ let g:EditorConfig_exec_path = '~/.editorconfig'
 
 " DEFAULT SETTINGS {{{
 
-let g:python2_host_prog = '/usr/bin/python'
+let g:python2_host_prog = '/usr/local/opt/python/libexec/bin/python'
 
 filetype plugin on " Detect filetype
 let mapleader="," " Set leader key to ,
@@ -113,7 +92,7 @@ let g:netrw_banner = 0
 if system('uname -s') == "Darwin\n"
   "OSX
   set clipboard=unnamed " Use OS clipboard by default
-  let g:python3_host_prog = '/usr/local/bin/python3'
+  let g:python3_host_prog = '/Users/lucasbittar/.config/nvim/venv/nvim-python-stable/bin/python3'
 else
   "Linux
   set clipboard=unnamedplus " Use UNIX clipboard by default
@@ -205,8 +184,6 @@ nnoremap <leader>. <c-^>
 nnoremap <leader><space> :nohlsearch<CR><CR>:<backspace>
 " kill all open buffers
 nnoremap <leader>bd :bufdo bdelete<CR>
-" Search and replace binding
-nnoremap <leader>sr :%s/\<<C-r><C-w>\>/
 " Edit file, starting in same directory as current file.
 nnoremap <leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 " Preserve clipboard
@@ -225,16 +202,12 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 " Find word in file
 nnoremap <leader>/ :BLines<CR>
-" Snippets finder
-nnoremap <leader>s :Snippets<CR>
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
 " gr - go to reference of word under cursor
-nmap <silent> gr <Plug>(coc-reference)
+nmap <silent> gr <Plug>(coc-references)
 " gd - go to definition of word under cursor
 nmap <silent> gd <Plug>(coc-definition)
 " rename the current word in the cursor
-nmap <leader>cr  <Plug>(coc-rename)
+nmap <silent> rr <Plug>(coc-rename)
 " restart when tsserver gets wonky
 nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 " Fix autofix problem of current line
@@ -247,11 +220,11 @@ nnoremap <silent> <leader>ls  :<C-u>CocList outline<cr>
 nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 " Next diagnostic
 nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
-" Confirm completion.
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 " Moves selected line up/down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" TMUX-sessionizer trigger
+nnoremap <silent> <C-f> :!tmux neww tmux-sessionizer<cr>
 
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'

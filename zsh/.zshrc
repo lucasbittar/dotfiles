@@ -8,6 +8,7 @@ export TERM="xterm-256color"
 export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/scripts:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -28,6 +29,7 @@ plugins=(z git-prompt vi-mode tmux fzf)
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.homebrew/bin:$PATH
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # FZF Setup
 # Set fzf installation directory path
@@ -55,7 +57,6 @@ source $ZSH/plugins/z/z.sh
 # Source files
 source ~/.aliases
 source ~/.extras
-
 
 # VI mode
 bindkey -v
@@ -111,5 +112,8 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=true
 SPACESHIP_CHAR_SYMBOL="$"
 SPACESHIP_CHAR_SUFFIX=" "
+
+# Run TMUX automatically
+# ta Home
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

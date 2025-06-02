@@ -48,10 +48,8 @@ gcl() {
 
 ###
 
-# Tmuxinator
-alias tx="tmuxinator"
-alias txs="tx start"
-alias txe="tx edit"
+# TMUX-sessionizer
+alias ts="tmux-sessionizer"
 
 # Shortcuts
 alias g="git"
