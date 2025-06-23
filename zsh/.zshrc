@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
 export HISTFILE=$HOME/.zsh_history
 export TERM="xterm-256color"
 
@@ -14,17 +12,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
+# Autoload any functions in your fpath (like compinit for autocompletion)
+# Initialize tab completion
+autoload -Uz compinit
+compinit
 
+# Enable history
+HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-# My own custom theme.
-# I like: ys, apple, avit, fino
-ZSH_THEME="spaceship"
-
-# plugins=(sublime z vi-mode zsh-syntax-highlighting zsh-autosuggestions git-prompt tmux)
 plugins=(z git-prompt vi-mode tmux fzf)
+
+setopt sharehistory       # Share history between all sessions
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -32,8 +32,10 @@ export PATH=$HOME/.homebrew/bin:$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # FZF Setup
+
 # Set fzf installation directory path
 FD_OPTIONS="--hidden --exclude .git --exclude node_modules"
+
 # Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND="fd $FD_OPTIONS"
 
@@ -50,11 +52,6 @@ export EDITOR="$VISUAL"
 
 ZSH_DISABLE_COMPFIX=true
 
-source $ZSH/oh-my-zsh.sh
-
-# z
-source $ZSH/plugins/z/z.sh
-
 # Source files
 source ~/.aliases
 source ~/.extras
@@ -63,58 +60,6 @@ source ~/.extras
 bindkey -v
 export KEYTIMEOUT=1
 
-# Updates editor information when the keymap changes.
-function zle-keymap-select() {
-  zle reset-prompt
-  zle -R
-}
-
-zle -N zle-keymap-select
-
-function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
-}
-
-# define right prompt, regardless of whether the theme defined it
-RPS1='$(vi_mode_prompt_info)'
-RPS2=$RPS1
-
-### Added by Zplugin's installer
-if [[ ! -d $HOME/.zplugin/bin ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing Zplugin…%f"
-    command mkdir -p $HOME/.zplugin
-    command git clone https://github.com/zdharma/zplugin $HOME/.zplugin/bin && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%F" || \
-        print -P "%F{160}▓▒░ The clone has failed.%F"
-fi
-source "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin installer's chunk
-
-zplugin light zdharma/fast-syntax-highlighting
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zsh-users/zsh-history-substring-search
-zplugin light zsh-users/zsh-completions
-
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  node
-  exec_time     # Execution time
-  line_sep      # Line break
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-SPACESHIP_USER_SHOW=always
-SPACESHIP_PROMPT_ADD_NEWLINE=true
-SPACESHIP_CHAR_SYMBOL="$"
-SPACESHIP_CHAR_SUFFIX=" "
-
-# Run TMUX automatically
-# ta Home
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(starship init zsh)"
