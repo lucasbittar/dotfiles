@@ -34,7 +34,6 @@ call plug#end()
 " FZF
 set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
 " An action can be a reference to a function that processes selected lines
 function! s:build_quickfix_list(lines)
@@ -52,7 +51,7 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
 
 " Syntastic
 let g:syntastic_sass_checkers=["sasslint"]

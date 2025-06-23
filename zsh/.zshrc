@@ -38,7 +38,8 @@ FD_OPTIONS="--hidden --exclude .git --exclude node_modules"
 export FZF_DEFAULT_COMMAND="fd $FD_OPTIONS"
 
 export FZF_BASE=/usr/local/opt/fzf
-export FZF_DEFAULT_OPTS="--reverse --no-mouse --height 50% -1 --multi --inline-info"
+# export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --multi --inline-info"
+export FZF_DEFAULT_OPTS="--layout=default --height=100% --info=inline"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always {} | head -500'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_R_OPTS="--sort --exact"

@@ -1,163 +1,245 @@
 {
-    "global": {
-        "check_for_updates_on_startup": true,
-        "show_in_menu_bar": true,
-        "show_profile_name_in_menu_bar": false
-    },
-    "profiles": [
-        {
-            "complex_modifications": {
-                "rules": [
-                    {
-                        "description": "CAPS_LOCK to CTRL",
-                        "manipulators": [
-                            {
-                                "from": { "key_code": "caps_lock" },
-                                "to": { "key_code": "left_control" },
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                      "description": "Switch to Google Chrome (Control + 2)",
-                      "manipulators": [
-                        {
-                          "type": "basic",
-                          "from": {
-                            "key_code": "2",
-                            "modifiers": {
-                              "mandatory": ["control"]
-                            }
-                          },
-                          "to": [
-                            {
-                              "shell_command": "open -a 'Google Chrome'"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                        "description": "Vi Mode [left_control + hjkl]",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.vim\\.",
-                                            "^com.googlecode.iterm2"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["caps_lock", "command", "option", "shift", "fn"]
-                                    }
-                                },
-                                "to": [{ "key_code": "left_arrow" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.vim\\.",
-                                            "^com.googlecode.iterm2"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["caps_lock", "command", "option", "shift", "fn"]
-                                    }
-                                },
-                                "to": [{ "key_code": "down_arrow" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.vim\\.",
-                                            "^com.googlecode.iterm2"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["caps_lock", "command", "option", "shift", "fn"]
-                                    }
-                                },
-                                "to": [{ "key_code": "up_arrow" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.vim\\.",
-                                            "^com.googlecode.iterm2"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["caps_lock", "command", "option", "shift", "fn"]
-                                    }
-                                },
-                                "to": [{ "key_code": "right_arrow" }],
-                                "type": "basic"
-                            }
-                        ]
+  "global": {
+    "check_for_updates_on_startup": true,
+    "show_in_menu_bar": false,
+    "show_profile_name_in_menu_bar": false
+  },
+  "profiles": [
+    {
+      "complex_modifications": {
+        "parameters": {
+          "basic.simultaneous_threshold_milliseconds": 50,
+          "basic.to_delayed_action_delay_milliseconds": 500,
+          "basic.to_if_alone_timeout_milliseconds": 200,
+          "basic.to_if_held_down_threshold_milliseconds": 200
+        },
+        "rules": [
+          {
+            "description": "CAPS_LOCK to CTRL",
+            "manipulators": [
+              {
+                "from": { "key_code": "caps_lock" },
+                "to": { "key_code": "left_control" },
+                "to_if_alone": { "key_code": "delete_or_backspace" },
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Remap Tab to Hyper key when held, Tab when tapped",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "tab"
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift",
+                    "modifiers": ["any"]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "hyper",
+                      "value": 1
                     }
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "hyper",
+                      "value": 0
+                    }
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Switch to Ghostty (Control + 1)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "1",
+                  "modifiers": {
+                    "mandatory": ["control"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a Ghostty"
+                  }
                 ]
-            },
-            "devices": [
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 45883,
-                        "vendor_id": 1133
-                    },
-                    "manipulate_caps_lock_led": false
-                }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": { "key_code": "f3" },
-                    "to": [{ "key_code": "mission_control" }]
+              }
+            ]
+          },
+          {
+            "description": "Switch to Google Chrome (Control + 2)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "2",
+                  "modifiers": {
+                    "mandatory": ["control"]
+                  }
                 },
-                {
-                    "from": { "key_code": "f4" },
-                    "to": [{ "key_code": "launchpad" }]
+                "to": [
+                  {
+                    "shell_command": "open -a 'Google Chrome'"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Vi Mode [left_control + hjkl]",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^org\\.vim\\."
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "from": {
+                  "key_code": "h",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": [
+                      "caps_lock",
+                      "command",
+                      "option",
+                      "shift",
+                      "fn"
+                    ]
+                  }
                 },
-                {
-                    "from": { "key_code": "f5" },
-                    "to": [{ "key_code": "illumination_decrement" }]
+                "to": [{ "key_code": "left_arrow" }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^org\\.vim\\."
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": [
+                      "caps_lock",
+                      "command",
+                      "option",
+                      "shift",
+                      "fn"
+                    ]
+                  }
                 },
-                {
-                    "from": { "key_code": "f6" },
-                    "to": [{ "key_code": "illumination_increment" }]
-                }
-            ],
-            "name": "Default profile",
-            "selected": true,
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "keyboard_type_v2": "ansi"
-            }
+                "to": [{ "key_code": "down_arrow" }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^org\\.vim\\."
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "from": {
+                  "key_code": "k",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": [
+                      "caps_lock",
+                      "command",
+                      "option",
+                      "shift",
+                      "fn"
+                    ]
+                  }
+                },
+                "to": [{ "key_code": "up_arrow" }],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^org\\.vim\\."
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "from": {
+                  "key_code": "l",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": [
+                      "caps_lock",
+                      "command",
+                      "option",
+                      "shift",
+                      "fn"
+                    ]
+                  }
+                },
+                "to": [{ "key_code": "right_arrow" }],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+      "devices": [
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 45883,
+            "vendor_id": 1133
+          },
+          "manipulate_caps_lock_led": false
         }
-    ]
+      ],
+      "fn_function_keys": [
+        {
+          "from": { "key_code": "f3" },
+          "to": [{ "key_code": "mission_control" }]
+        },
+        {
+          "from": { "key_code": "f4" },
+          "to": [{ "key_code": "launchpad" }]
+        },
+        {
+          "from": { "key_code": "f5" },
+          "to": [{ "key_code": "illumination_decrement" }]
+        },
+        {
+          "from": { "key_code": "f6" },
+          "to": [{ "key_code": "illumination_increment" }]
+        }
+      ],
+      "name": "Default profile",
+      "selected": true,
+      "virtual_hid_keyboard": {
+        "country_code": 0,
+        "keyboard_type_v2": "ansi"
+      }
+    }
+  ]
 }

@@ -68,3 +68,6 @@
 	tool = kdiff3
 [pull]
 	rebase = false
+
+[branch]
+    autoSetupRemove = true
