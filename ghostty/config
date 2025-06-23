@@ -46,4 +46,4 @@ theme = synthwave
 font-family = Hack Nerd Font Mono Regular
 macos-non-native-fullscreen = true
 fullscreen = true
-background = #FF9900
+background = #010101
