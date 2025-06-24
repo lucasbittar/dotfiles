@@ -3,3 +3,22 @@
 
 # Inserts a blank line between shell prompts
 add_newline = true
+
+# Set 'benokai' as custom color palette
+palette = 'benokai'
+
+# Define custom colors
+[palettes.benokai]
+
+# Overwrite existing color
+dark_green = '#67930f'
+cyan = '#66d9ef'
+dark_gray = '#49483e'
+gray = '#75715e'
+green = '#a6e22e'
+orange = '#fd971f'
+pink = '#f92672'
+purple = '#ae81ff'
+red = '#8b0807'
+white = '#f8f8f0'
+yellow = '#e6db74'
