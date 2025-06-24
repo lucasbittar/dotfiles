@@ -1,6 +1,23 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+format = """
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$python\
+$lua\
+$nodejs\
+$golang\
+$package\
+$aws\
+$docker_context\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
+
 # Inserts a blank line between shell prompts
 add_newline = true
 
@@ -22,3 +39,32 @@ purple = '#ae81ff'
 red = '#8b0807'
 white = '#f8f8f0'
 yellow = '#e6db74'
+
+[git_branch]
+symbol = ' '
+style = 'bold pink'
+
+[fill]
+style = 'dark_gray'
+symbol = ''
+
+[python]
+style = 'bold yellow'
+symbol = ''
+format = ' [via](white) [$symbol $version]($style) '
+
+[nodejs]
+style = 'green'
+symbol = ''
+format = ' [via](white) [$symbol $version]($style) '
+
+[jobs]
+symbol = ' '
+style = 'red'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[cmd_duration]
+min_time = 500
+style = 'bold yellow'
+format = ' | [$duration]($style) '
