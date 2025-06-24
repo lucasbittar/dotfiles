@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Path to your oh-my-zsh installation.
 export HISTFILE=$HOME/.zsh_history
 export TERM="xterm-256color"
 
@@ -12,19 +13,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Autoload any functions in your fpath (like compinit for autocompletion)
-# Initialize tab completion
+# Initialize zsh completion system
 autoload -Uz compinit
 compinit
 
-# Enable history
-HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-
-plugins=(z git-prompt vi-mode tmux fzf)
-
-setopt sharehistory       # Share history between all sessions
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -32,10 +26,8 @@ export PATH=$HOME/.homebrew/bin:$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # FZF Setup
-
 # Set fzf installation directory path
 FD_OPTIONS="--hidden --exclude .git --exclude node_modules"
-
 # Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND="fd $FD_OPTIONS"
 
@@ -60,6 +52,25 @@ source ~/.extras
 bindkey -v
 export KEYTIMEOUT=1
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# Initialize Starship prompt
 eval "$(starship init zsh)"
+
+# --- Zsh Plugins (Manually Sourced) ---
+# Quick tutorial
+# mkdir -p ~/.zsh/plugins
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
+# git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
+
+# Initialize z (rupa/z)
+source ~/.zsh/plugins/z/z.sh
+
+# zsh-autosuggestions
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# fzf key-bindings and completion (sourced directly from Homebrew installation)
+source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+
+# zsh-syntax-highlighting
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
