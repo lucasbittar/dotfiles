@@ -13,12 +13,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Initialize zsh completion system
-autoload -Uz compinit
-compinit
-
+# History
 HISTSIZE=10000
-SAVEHIST=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -48,8 +55,20 @@ ZSH_DISABLE_COMPFIX=true
 source ~/.aliases
 source ~/.extras
 
+# Completion style
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# Keybindings
+
 # VI mode
 bindkey -v
+
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# TODO
+bindkey '^l' clear
+
 export KEYTIMEOUT=1
 
 # Initialize Starship prompt
@@ -60,6 +79,7 @@ eval "$(starship init zsh)"
 # mkdir -p ~/.zsh/plugins
 # git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-autosuggestions
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/plugins/zsh-completions
 # git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
 
 # Initialize z (rupa/z)
@@ -67,6 +87,13 @@ source ~/.zsh/plugins/z/z.sh
 
 # zsh-autosuggestions
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# zsh-completions
+source ~/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+
+# Initialize zsh completion system
+autoload -Uz compinit
+compinit
 
 # fzf key-bindings and completion (sourced directly from Homebrew installation)
 source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
