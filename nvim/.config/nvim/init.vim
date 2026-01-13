@@ -8,6 +8,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gcorne/vim-sass-lint'
+Plug 'github/copilot.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
