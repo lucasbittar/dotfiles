@@ -42,7 +42,7 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = synthwave
+theme = Synthwave
 font-family = Hack Nerd Font Mono Regular
 macos-non-native-fullscreen = true
 fullscreen = true
