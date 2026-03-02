@@ -74,7 +74,15 @@ fo() {
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+    if [ "$key" = ctrl-o ]; then
+      if command -v xdg-open &>/dev/null; then
+        xdg-open "$file"
+      else
+        open "$file"
+      fi
+    else
+      ${EDITOR:-vim} "$file"
+    fi
   fi
 }
 # tm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
@@ -89,9 +97,6 @@ ftm() {
 }
 
 ### Functions
-
-# Search for a file using MacOS Spotlight's metadata
-spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
 
 # Extract most know archives with one command
 extract () {

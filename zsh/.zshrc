@@ -4,8 +4,10 @@
 export HISTFILE=$HOME/.zsh_history
 export TERM="xterm-256color"
 
-export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
-export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+if [ -d "$HOME/Library/Android/sdk" ]; then
+  export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
+  export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+fi
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/scripts:$PATH
@@ -30,8 +32,8 @@ setopt hist_find_no_dups
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.homebrew/bin:$PATH
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+[ -d "$HOME/.homebrew/bin" ] && export PATH=$HOME/.homebrew/bin:$PATH
+[ -d "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # FZF Setup
 # Set fzf installation directory path
@@ -39,7 +41,11 @@ FD_OPTIONS="--hidden --exclude .git --exclude node_modules"
 # Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND="fd $FD_OPTIONS"
 
-export FZF_BASE=/usr/local/opt/fzf
+if [ -d "/usr/local/opt/fzf" ]; then
+  export FZF_BASE=/usr/local/opt/fzf
+elif [ -d "/usr/share/doc/fzf" ]; then
+  export FZF_BASE=/usr/share/doc/fzf
+fi
 # export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --multi --inline-info"
 export FZF_DEFAULT_OPTS="--layout=default --height=100% --info=inline"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always {} | head -500'"
@@ -109,7 +115,7 @@ fi
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lucasbittar/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lucasbittar/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/lucasbittar/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lucasbittar/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi

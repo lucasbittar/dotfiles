@@ -80,8 +80,12 @@ create_symlinks_old() {
 
 create_symlinks() {
 
-    cd $HOME/Code/dotfiles
+    cd $HOME/.dotfiles
     stow -vt $HOME git nvim tmux zsh
+
+    if [ "$(uname -s)" = "Darwin" ]; then
+        stow -vt $HOME iterm karabiner
+    fi
 
 }
 

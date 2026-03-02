@@ -32,3 +32,6 @@ alias clear-dns-cache="sudo dscacheutil -flushcache; \
                                   && npm install -g npm \
                                   && npm update -g"
 
+# Search for a file using MacOS Spotlight's metadata
+spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
+
