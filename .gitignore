@@ -6,6 +6,9 @@ oh-my-zsh/
 *.swp
 *.swo
 
+# Nvim Python venv
+nvim/.config/nvim/venv/
+
 # Dotfiles (synced via Dropbox)
 .z
 .zsh_history

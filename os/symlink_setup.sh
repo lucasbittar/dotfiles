@@ -87,6 +87,9 @@ create_symlinks() {
         stow -vt $HOME iterm karabiner
     fi
 
+    # Manually link .aliases (shell package structure doesn't work with stow)
+    ln -sf $HOME/.dotfiles/shell/aliases/aliases/.aliases $HOME/.aliases
+
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
