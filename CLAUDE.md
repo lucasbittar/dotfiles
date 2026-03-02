@@ -51,6 +51,13 @@ sudo apt install -y fonts-firacode
 
 - **Optional** (ask user first): Spotify, VLC, EasyEffects, Zig
 
+WiFi drivers (MacBook Pro running Linux — Broadcom BCM4360):
+```bash
+sudo apt install -y bcmwl-kernel-source broadcom-sta-dkms b43-fwcutter
+```
+Reboot after installing. The `wl` kernel module should load automatically. If WiFi
+still doesn't work, try `sudo modprobe wl`.
+
 ### macOS (Homebrew)
 
 If Homebrew is not installed:
