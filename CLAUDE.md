@@ -46,8 +46,13 @@ Additional tools (install individually):
 
 Communication apps:
 ```bash
-sudo snap install slack zoom-client teams-for-linux
+sudo snap install slack teams-for-linux
 ```
+- **Zoom**: download `.deb` and install (snap has sandboxing issues):
+  ```bash
+  wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
+  sudo dpkg -i /tmp/zoom_amd64.deb
+  ```
 
 Fonts:
 ```bash
@@ -195,6 +200,11 @@ Install TPM:
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
+
+The `.tmux.conf` already declares these TPM plugins:
+- **tmux-sensible** — sensible defaults
+- **tmux-resurrect** — save/restore sessions (`prefix + Ctrl-s` / `prefix + Ctrl-r`)
+- **tmux-continuum** — automatic session restore on tmux start
 
 Tell the user to open tmux and press `prefix + I` to install plugins.
 
