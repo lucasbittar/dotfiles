@@ -34,7 +34,9 @@ call plug#end()
 
 " FZF
 set rtp+=~/.fzf
-set rtp+=/usr/local/opt/fzf
+if isdirectory('/usr/local/opt/fzf')
+  set rtp+=/usr/local/opt/fzf
+endif
 
 " An action can be a reference to a function that processes selected lines
 function! s:build_quickfix_list(lines)
@@ -77,7 +79,9 @@ let g:EditorConfig_exec_path = '~/.editorconfig'
 
 " DEFAULT SETTINGS {{{
 
-let g:python2_host_prog = '/usr/local/opt/python/libexec/bin/python'
+if has('mac')
+  let g:python2_host_prog = '/usr/local/opt/python/libexec/bin/python'
+endif
 
 filetype plugin on " Detect filetype
 let mapleader="," " Set leader key to ,
