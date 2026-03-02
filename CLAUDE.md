@@ -87,7 +87,33 @@ brew install --cask dropbox alfred appcleaner the-unarchiver zoom
 
 ---
 
-## 4. Shell Setup
+## 4. Keyboard Configuration (Linux only)
+
+Remap Caps Lock to Ctrl:
+```bash
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+```
+
+Set fast key repeat (200ms delay, 20ms repeat):
+```bash
+gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+```
+
+Install Input Remapper for system-wide vim navigation (Ctrl+HJKL → arrow keys):
+```bash
+sudo apt install -y input-remapper
+```
+After installing, open Input Remapper and create a "VIM Navigation" preset for the
+keyboard with these mappings:
+- Ctrl+H → Left
+- Ctrl+J → Down
+- Ctrl+K → Up
+- Ctrl+L → Right
+
+---
+
+## 5. Shell Setup
 
 Set zsh as the default shell:
 ```bash
@@ -104,7 +130,7 @@ git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
 
 ---
 
-## 5. Node.js Setup
+## 6. Node.js Setup
 
 Install nvm:
 ```bash
@@ -118,7 +144,7 @@ nvm install --lts
 
 ---
 
-## 6. Create Symlinks
+## 7. Create Symlinks
 
 Use `ln -sf` for each link. The repo should be cloned to `~/.dotfiles`.
 
@@ -148,7 +174,7 @@ ln -sf ~/.dotfiles/karabiner/.config/karabiner ~/.config/karabiner
 
 ---
 
-## 7. Local Scripts
+## 8. Local Scripts
 
 Copy scripts and make them executable:
 ```bash
@@ -158,7 +184,7 @@ chmod +x ~/.local/scripts/*
 
 ---
 
-## 8. Tmux Plugin Manager
+## 9. Tmux Plugin Manager
 
 Install TPM:
 ```bash
@@ -169,7 +195,7 @@ Tell the user to open tmux and press `prefix + I` to install plugins.
 
 ---
 
-## 9. Neovim Plugins
+## 10. Neovim Plugins
 
 Tell the user to open nvim and run:
 ```
@@ -178,7 +204,7 @@ Tell the user to open nvim and run:
 
 ---
 
-## 10. Git & SSH Setup
+## 11. Git & SSH Setup
 
 Generate an SSH key for GitHub:
 ```bash
@@ -211,7 +237,7 @@ ssh -T git@github.com
 
 ---
 
-## 11. macOS System Preferences (macOS only)
+## 12. macOS System Preferences (macOS only)
 
 Run the macOS defaults script:
 ```bash
@@ -220,7 +246,7 @@ bash ~/.dotfiles/.macos
 
 ---
 
-## 12. Verification Checklist
+## 13. Verification Checklist
 
 After setup, verify each of these:
 
