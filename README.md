@@ -1,26 +1,27 @@
 # dotfiles
 
-My dotfiles repo.
+Cross-platform dotfiles for macOS and Linux (Ubuntu/Pop!_OS). Configs for zsh, neovim, tmux, git, Ghostty, Starship, and more.
 
-## How to setup a new machine (MacOS/Ubuntu/Arch)
+## Setup
 
-To set up the `dotfiles` just run the appropriate snippet in the terminal:
+On a fresh machine:
 
-(:warning: **DO NOT** run the `setup` snippet if you don't fully
-understand [what it does](os/setup.sh). Seriously, **DON'T**!)
+1. Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+2. Clone this repo to `~/.dotfiles`
+3. Run Claude Code and ask it to **set up this machine**
 
-| OS | Snippet |
-|:---|:---|
-| `macOS` | `bash -c "$(curl -LsS https://raw.github.com/lucasbittar/dotfiles/master/os/setup.sh)"` |
-| `Ubuntu` | `bash -c "$(wget -qO - https://raw.github.com/lucasbittar/dotfiles/master/os/setup.sh)"` |
+Claude reads `CLAUDE.md` and walks through installing packages, creating symlinks, configuring the shell, and everything else needed to get a fully working environment.
 
-## Acknowledgements
+## What's included
 
-Inspiration and code was taken from many sources, including:
-
-* [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
-* [Cătălin Mariș](https://github.com/alrra/dotfiles)
-
+- **zsh** — config with Starship prompt, vi mode, fzf integration, manually sourced plugins
+- **neovim** — full config with plugin support
+- **tmux** — config with TPM, ready-tmux script, tmux-sessionizer
+- **git** — gitconfig, global gitignore, extras, diff-so-fancy
+- **Ghostty** — terminal config
+- **Starship** — prompt theme
+- **shell aliases** — shared + OS-specific aliases
+- **macOS** — system defaults script, Karabiner, iTerm2 config
 
 ## License
 

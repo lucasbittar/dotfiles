@@ -6,8 +6,8 @@ alias ...="cd ../.."
 ###
 
 # List directories
-alias ll="exa -lh --color=always --group-directories-first"
-alias l="exa -lah --color=always --group-directories-first"
+alias ll="eza -lh --color=always --group-directories-first"
+alias l="eza -lah --color=always --group-directories-first"
 
 # Git
 alias push="git push"
