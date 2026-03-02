@@ -42,6 +42,8 @@ Additional tools (install individually):
 - **Starship prompt**: `curl -sS https://starship.rs/install.sh | sh`
 - **diff-so-fancy**: `sudo snap install diff-so-fancy` (or `npm install -g diff-so-fancy`)
 - **Google Chrome**: download the `.deb` from https://www.google.com/chrome/ and install with `sudo dpkg -i`
+- **Ghostty**: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"`
+
 Fonts:
 ```bash
 sudo apt install -y fonts-firacode
