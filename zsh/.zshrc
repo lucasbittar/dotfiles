@@ -7,6 +7,7 @@ export TERM="xterm-256color"
 export PATH=$HOME/Library/Android/sdk/cmdline-tools:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/scripts:$PATH
 
 export NVM_DIR="$HOME/.nvm"
@@ -66,8 +67,8 @@ bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-# TODO
-bindkey '^l' clear
+bindkey '^e' autosuggest-accept
+bindkey '^l' clear-screen
 
 export KEYTIMEOUT=1
 
@@ -95,9 +96,14 @@ source ~/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 autoload -Uz compinit
 compinit
 
-# fzf key-bindings and completion (sourced directly from Homebrew installation)
-source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
-source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+# fzf key-bindings and completion
+if command -v brew &>/dev/null; then
+  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+elif [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  source /usr/share/doc/fzf/examples/completion.zsh
+fi
 
 # zsh-syntax-highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -107,4 +113,3 @@ if [ -f '/Users/lucasbittar/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lucasbittar/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lucasbittar/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="$HOME/.local/bin:$PATH"
