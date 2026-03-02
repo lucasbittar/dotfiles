@@ -9,6 +9,9 @@ oh-my-zsh/
 # Nvim Python venv
 nvim/.config/nvim/venv/
 
+# Nvim undo history
+nvim/.config/nvim/undodir/
+
 # Dotfiles (synced via Dropbox)
 .z
 .zsh_history
