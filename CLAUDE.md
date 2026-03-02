@@ -44,6 +44,11 @@ Additional tools (install individually):
 - **Google Chrome**: download the `.deb` from https://www.google.com/chrome/ and install with `sudo dpkg -i`
 - **Ghostty**: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"`
 
+Communication apps:
+```bash
+sudo snap install slack zoom-client teams-for-linux
+```
+
 Fonts:
 ```bash
 sudo apt install -y fonts-firacode
@@ -72,7 +77,7 @@ brew install bat eza fd fzf git moreutils neovim python3 ripgrep wget tmux yt-dl
 
 Core applications:
 ```bash
-brew install --cask google-chrome firefox docker slack spotify vlc karabiner-elements ghostty
+brew install --cask google-chrome firefox docker slack spotify vlc karabiner-elements ghostty zoom microsoft-teams
 ```
 
 Fonts:
@@ -82,7 +87,7 @@ brew install --cask font-hack-nerd-font font-fira-code
 
 **Optional** (ask user first):
 ```bash
-brew install --cask dropbox alfred appcleaner the-unarchiver zoom
+brew install --cask dropbox alfred appcleaner the-unarchiver
 ```
 
 ---
