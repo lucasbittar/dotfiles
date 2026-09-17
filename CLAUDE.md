@@ -324,10 +324,14 @@ Run the macOS defaults script:
 bash ~/.dotfiles/.macos
 ```
 
-**Run this from Ghostty, not Terminal.app** — the script's cleanup loop force-quits
-`Terminal`, killing its own session mid-run. It also force-quits Chrome, Finder, Dock,
-Mail, Messages, Safari and Calendar without saving, needs an interactive sudo password,
-and some changes only apply after a logout.
+The cleanup loop force-quits Chrome, Finder, Dock, Mail, Messages, Safari, Calendar,
+Contacts and Activity Monitor **without saving**, so close unsaved work first. It also
+wipes the Dock's persistent apps (`persistent-apps -array`), so you will rebuild the
+Dock afterward. Needs an interactive sudo password, and some changes — including the
+key repeat rate — only apply to apps launched after a logout.
+
+`Terminal` is no longer in the kill list, so running this from Terminal.app no longer
+kills its own session mid-run.
 
 ---
 
