@@ -93,7 +93,7 @@ brew install --cask font-hack-nerd-font font-fira-code
 Notes:
 - **Apple Silicon**: Homebrew installs to `/opt/homebrew`, not `/usr/local`. `zsh/.zshrc`
   runs `eval "$(/opt/homebrew/bin/brew shellenv)"` (guarded) to put `brew`, `starship`,
-  `eza` and `fzf` on PATH. Without that, the section 13 checks for the prompt, fzf
+  `eza` and `fzf` on PATH. Without that, the section 14 checks for the prompt, fzf
   keybindings and aliases all fail.
 - The `docker` cask is now named **`docker-desktop`**. The old name still resolves via
   alias, but use the new one.
@@ -277,7 +277,47 @@ ssh -T git@github.com
 
 ---
 
-## 12. macOS System Preferences (macOS only)
+## 12. Clone Personal Repos
+
+All personal projects live in `~/Code`. Clone over **SSH**, not HTTPS — several of
+these repos are private, and HTTPS would prompt for a username and a personal access
+token on every clone, fetch and push. SSH uses the key from section 11 and just works
+once the key is on the account.
+
+Requires section 11 to be complete, including adding the public key at
+https://github.com/settings/ssh/new. Verify first:
+
+```bash
+ssh -T git@github.com   # expect: "Hi <user>! You've successfully authenticated..."
+```
+
+Then clone:
+
+```bash
+mkdir -p ~/Code && cd ~/Code
+for repo in pv7 personal-site cartadeadeus myscrobble weatherapp; do
+  [ -d "$repo" ] || git clone "git@github.com:lucasbittar/$repo.git"
+done
+```
+
+| Repo | Visibility |
+| --- | --- |
+| `pv7` | private |
+| `personal-site` | public |
+| `cartadeadeus` | private |
+| `myscrobble` | public |
+| `weatherapp` | public |
+
+If a repo was already cloned over HTTPS, switch its remote to SSH:
+
+```bash
+cd ~/Code/<repo>
+git remote set-url origin git@github.com:lucasbittar/<repo>.git
+```
+
+---
+
+## 13. macOS System Preferences (macOS only)
 
 Run the macOS defaults script:
 ```bash
@@ -291,7 +331,7 @@ and some changes only apply after a logout.
 
 ---
 
-## 13. Verification Checklist
+## 14. Verification Checklist
 
 After setup, verify each of these:
 
@@ -302,5 +342,7 @@ After setup, verify each of these:
 - [ ] `fzf` keybindings work (Ctrl+R for history, Ctrl+T for files)
 - [ ] Aliases are loaded (`type ll` should show the eza alias)
 - [ ] `git` is configured (`git config user.name` returns a value)
+- [ ] `ssh -T git@github.com` authenticates successfully
+- [ ] Personal repos are cloned into `~/Code` (section 12)
 - [ ] `top` launches btop
 - [ ] Rectangle is running (macOS window snapping; needs Accessibility permission)
