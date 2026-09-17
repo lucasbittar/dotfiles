@@ -34,7 +34,7 @@ mkdir -p ~/.config
 
 ```bash
 sudo apt update && sudo apt install -y \
-  build-essential curl wget git fd-find fzf neovim tmux xclip zsh eza
+  build-essential btop curl wget git fd-find fzf neovim tmux xclip zsh eza
 ```
 
 Additional tools (install individually):
@@ -77,18 +77,28 @@ If Homebrew is not installed:
 
 Core CLI tools:
 ```bash
-brew install bat eza fd fzf git moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
+brew install bat btop eza fd fzf git moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
 ```
 
 Core applications:
 ```bash
-brew install --cask google-chrome firefox docker slack spotify vlc karabiner-elements ghostty zoom microsoft-teams
+brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle
 ```
 
 Fonts:
 ```bash
 brew install --cask font-hack-nerd-font font-fira-code
 ```
+
+Notes:
+- **Apple Silicon**: Homebrew installs to `/opt/homebrew`, not `/usr/local`. `zsh/.zshrc`
+  runs `eval "$(/opt/homebrew/bin/brew shellenv)"` (guarded) to put `brew`, `starship`,
+  `eza` and `fzf` on PATH. Without that, the section 13 checks for the prompt, fzf
+  keybindings and aliases all fail.
+- The `docker` cask is now named **`docker-desktop`**. The old name still resolves via
+  alias, but use the new one.
+- Docker Desktop and Karabiner-Elements each need an approval in
+  System Settings → Privacy & Security on first launch.
 
 **Optional** (ask user first):
 ```bash
@@ -129,6 +139,9 @@ Set zsh as the default shell:
 ```bash
 chsh -s $(which zsh)
 ```
+
+On modern macOS this is already the default and the command is a no-op; check with
+`dscl . -read /Users/$(whoami) UserShell` before bothering (it prompts for a password).
 
 Install zsh plugins manually:
 ```bash
@@ -208,6 +221,11 @@ The `.tmux.conf` already declares these TPM plugins:
 
 Tell the user to open tmux and press `prefix + I` to install plugins.
 
+Or install them without the manual step:
+```bash
+~/.tmux/plugins/tpm/bin/install_plugins
+```
+
 ---
 
 ## 10. Neovim Plugins
@@ -216,6 +234,13 @@ Tell the user to open nvim and run:
 ```
 :PlugInstall
 ```
+
+Or install them without the manual step:
+```bash
+nvim --headless +PlugInstall +qall
+```
+Plugins land in `~/.local/share/nvim/plugged`. Requires Node for `coc.nvim`, so run
+this after section 6.
 
 ---
 
@@ -259,6 +284,11 @@ Run the macOS defaults script:
 bash ~/.dotfiles/.macos
 ```
 
+**Run this from Ghostty, not Terminal.app** — the script's cleanup loop force-quits
+`Terminal`, killing its own session mid-run. It also force-quits Chrome, Finder, Dock,
+Mail, Messages, Safari and Calendar without saving, needs an interactive sudo password,
+and some changes only apply after a logout.
+
 ---
 
 ## 13. Verification Checklist
@@ -272,3 +302,5 @@ After setup, verify each of these:
 - [ ] `fzf` keybindings work (Ctrl+R for history, Ctrl+T for files)
 - [ ] Aliases are loaded (`type ll` should show the eza alias)
 - [ ] `git` is configured (`git config user.name` returns a value)
+- [ ] `top` launches btop
+- [ ] Rectangle is running (macOS window snapping; needs Accessibility permission)

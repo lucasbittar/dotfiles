@@ -21,7 +21,7 @@ Claude reads `CLAUDE.md` and walks through installing packages, creating symlink
 - **Ghostty** — terminal config
 - **Starship** — prompt theme
 - **shell aliases** — shared + OS-specific aliases
-- **macOS** — system defaults script, Karabiner, iTerm2 config
+- **macOS** — system defaults script, Karabiner, iTerm2 config, Rectangle window snapping
 
 ## License
 
