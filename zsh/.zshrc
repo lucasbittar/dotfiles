@@ -33,6 +33,8 @@ setopt hist_find_no_dups
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 [ -d "$HOME/.homebrew/bin" ] && export PATH=$HOME/.homebrew/bin:$PATH
+# Apple Silicon Homebrew (/opt/homebrew): puts brew, starship, eza, fzf on PATH
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -d "/usr/local/opt/python/libexec/bin" ] && export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # FZF Setup
@@ -119,3 +121,8 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/Downloa
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/lucasbittar/.docker/completions $fpath)
+autoload -Uz compinit
+(( ${+_comps[docker]} )) || compinit
+# End of Docker CLI completions

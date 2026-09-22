@@ -58,7 +58,7 @@ alias v="nvim"
 alias c="clear"
 alias rm="rm -rf --"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias top="vtop --theme wizard"
+alias top="btop"
 
 if [[ $kernelName == "Darwin" ]];
 then
