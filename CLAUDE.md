@@ -82,7 +82,7 @@ brew install bat btop eza fd fzf git moreutils neovim python3 ripgrep wget tmux 
 
 Core applications:
 ```bash
-brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle
+brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle notion
 ```
 
 Fonts:

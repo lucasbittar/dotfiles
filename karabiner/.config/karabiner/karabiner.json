@@ -100,6 +100,44 @@
             ]
           },
           {
+            "description": "Switch to Slack (Control + 3)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "3",
+                  "modifiers": {
+                    "mandatory": ["control"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a Slack"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Switch to Notion (Control + 4)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "4",
+                  "modifiers": {
+                    "mandatory": ["control"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a Notion"
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "Vi Mode [left_control + hjkl]",
             "manipulators": [
               {
