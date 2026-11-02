@@ -9,6 +9,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gcorne/vim-sass-lint'
 Plug 'github/copilot.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
@@ -194,6 +195,8 @@ nnoremap <leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 " xnoremap <leader>p \_dP
 " Toggle undotree
 nnoremap <leader>u :UndotreeToggle<CR>
+" Toggle markdown preview
+nnoremap <leader>m :MarkdownPreviewToggle<CR>
 " Project finder
 nnoremap <leader>a :Rg<CR>
 " History finder
