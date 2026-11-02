@@ -2,6 +2,17 @@
 
 " PLUGINS {{{
 
+" Reapply the local-links patch (relative .md links open in the preview), then
+" fetch the preview binary. vim-plug runs this from the plugin directory.
+function! MarkdownPreviewInstall(info) abort
+  let l:patch = expand('~/.config/nvim/patches/markdown-preview-local-links.patch')
+  call system(['git', 'apply', '-R', '--check', l:patch])
+  if v:shell_error
+    call system(['git', 'apply', l:patch])
+  endif
+  call mkdp#util#install()
+endfunction
+
 call plug#begin()
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
@@ -9,6 +20,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gcorne/vim-sass-lint'
 Plug 'github/copilot.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': function('MarkdownPreviewInstall') }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
@@ -194,6 +206,8 @@ nnoremap <leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 " xnoremap <leader>p \_dP
 " Toggle undotree
 nnoremap <leader>u :UndotreeToggle<CR>
+" Toggle markdown preview
+nnoremap <leader>m :MarkdownPreviewToggle<CR>
 " Project finder
 nnoremap <leader>a :Rg<CR>
 " History finder

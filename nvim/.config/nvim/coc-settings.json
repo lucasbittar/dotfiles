@@ -17,7 +17,13 @@
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enable": true,
   "prettier.eslintIntegration": true,
-  "python.jediEnabled": true,
+  "inlayHint.enable": false,
+  "[go]": {
+    "coc.preferences.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
   "tslint.jsEnable": true,
   "typescript.preferences.includePackageJsonAutoImports": [
     "on"

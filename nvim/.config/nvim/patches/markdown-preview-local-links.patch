@@ -1,0 +1,44 @@
+diff --git a/app/routes.js b/app/routes.js
+index 63d3a9a55db8..e3f558be2a5a 100644
+--- a/app/routes.js
++++ b/app/routes.js
+@@ -8,6 +8,39 @@ const use = function (route) {
+   routes.unshift((req, res, next) => () => route(req, res, next))
+ }
+ 
++// local markdown links
++// /page/other.md -> load the file into a buffer and redirect to /page/:bufnr
++use(async (req, res, next) => {
++  if (!/\.(md|markdown|mkd|mkdn|mdown|mdwn)$/i.test(req.asPath) || !/^\d+$/.test(req.bufnr)) {
++    return next()
++  }
++  try {
++    const nvim = req.plugin.nvim
++    const fileDir = await nvim.call('expand', `#${req.bufnr}:p:h`)
++    const linkPath = decodeURIComponent(req.asPath).replace(/^\/page\//, '')
++    // links that climb above /page/ (../other.md) or are root-relative lose
++    // their leading segments in the url, so search parent directories too
++    let dir = fileDir
++    let filePath = path.join(dir, linkPath)
++    while (!fs.existsSync(filePath) && dir !== path.dirname(dir)) {
++      dir = path.dirname(dir)
++      filePath = path.join(dir, linkPath)
++    }
++    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
++      const bufnr = await nvim.call('bufadd', filePath)
++      await nvim.call('setbufvar', [bufnr, '&buflisted', 1])
++      await nvim.command(`noswapfile call bufload(${bufnr})`)
++      res.statusCode = 302
++      res.setHeader('Location', `/page/${bufnr}`)
++      return res.end()
++    }
++    logger.error('markdown link not found: ', req.asPath)
++  } catch (e) {
++    logger.error('markdown link failed: ', req.asPath, e)
++  }
++  next()
++})
++
+ // /page/:number
+ use((req, res, next) => {
+   if (/\/page\/\d+/.test(req.asPath)) {
