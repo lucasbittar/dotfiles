@@ -242,6 +242,26 @@ nvim --headless +PlugInstall +qall
 Plugins land in `~/.local/share/nvim/plugged`. Requires Node for `coc.nvim`, so run
 this after section 6.
 
+Two plugins need a step that `:PlugInstall` does **not** cover:
+
+- **`vim-ai`** needs `pynvim`. `init.vim` points `g:python3_host_prog` at a venv that
+  the repo does not ship (it is gitignored), so create it:
+  ```bash
+  python3 -m venv ~/.config/nvim/venv/nvim-python-stable
+  ~/.config/nvim/venv/nvim-python-stable/bin/python3 -m pip install pynvim
+  ```
+  Without it, every nvim start prints "Python 3 support is required for vim-ai plugin".
+  Verify with `:echo has('python3')` (expect `1`).
+
+- **`markdown-preview.nvim`** needs its prebuilt browser binary. The
+  `mkdp#util#install()` hook does not run under headless `:PlugInstall`, so fetch it
+  directly:
+  ```bash
+  bash ~/.local/share/nvim/plugged/markdown-preview.nvim/app/install.sh
+  ```
+  It picks the right build per `uname -sm` (`markdown-preview-macos-arm64` on Apple
+  Silicon). Then `,m` toggles the preview from any markdown buffer.
+
 ---
 
 ## 11. Git & SSH Setup
