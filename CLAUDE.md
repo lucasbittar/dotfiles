@@ -262,6 +262,14 @@ Two plugins need a step that `:PlugInstall` does **not** cover:
   It picks the right build per `uname -sm` (`markdown-preview-macos-arm64` on Apple
   Silicon). Then `,m` toggles the preview from any markdown buffer.
 
+  Relative links to other markdown files (`[x](./other.md)`, `../other.md`) open in
+  the preview thanks to `nvim/.config/nvim/patches/markdown-preview-local-links.patch`,
+  which the plugin's `do` hook in `init.vim` applies. If the hook didn't run (headless
+  install), apply it by hand:
+  ```bash
+  git -C ~/.local/share/nvim/plugged/markdown-preview.nvim apply ~/.config/nvim/patches/markdown-preview-local-links.patch
+  ```
+
 ---
 
 ## 11. Git & SSH Setup
