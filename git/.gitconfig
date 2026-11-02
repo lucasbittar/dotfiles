@@ -71,3 +71,5 @@
 
 [branch]
     autoSetupRemove = true
+[init]
+	defaultBranch = main
