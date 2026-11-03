@@ -6,9 +6,16 @@
 " fetch the preview binary. vim-plug runs this from the plugin directory.
 function! MarkdownPreviewInstall(info) abort
   let l:patch = expand('~/.config/nvim/patches/markdown-preview-local-links.patch')
-  call system(['git', 'apply', '-R', '--check', l:patch])
+  " vim-plug cds into the plugin dir, but -C also lets this be called by hand
+  let l:dir = get(get(g:plugs, 'markdown-preview.nvim', {}), 'dir', getcwd())
+  " -R --check succeeds when the patch is already applied, so only apply if it fails
+  call system(['git', '-C', l:dir, 'apply', '-R', '--check', l:patch])
   if v:shell_error
-    call system(['git', 'apply', l:patch])
+    let l:out = system(['git', '-C', l:dir, 'apply', l:patch])
+    if v:shell_error
+      call mkdp#util#echo_messages('Error',
+            \ ['[markdown-preview.nvim] local-links patch failed:', l:out])
+    endif
   endif
   call mkdp#util#install()
 endfunction

@@ -264,11 +264,24 @@ Two plugins need a step that `:PlugInstall` does **not** cover:
 
   Relative links to other markdown files (`[x](./other.md)`, `../other.md`) open in
   the preview thanks to `nvim/.config/nvim/patches/markdown-preview-local-links.patch`,
-  which the plugin's `do` hook in `init.vim` applies. If the hook didn't run (headless
-  install), apply it by hand:
+  which the plugin's `do` hook in `init.vim` applies to `app/routes.js`. The patched
+  file is read by the prebuilt binary at server start (`--path app/server.js`), so no
+  rebuild is needed — but a preview server that is already running must be restarted
+  (`:MarkdownPreviewStop`, then `,m` again).
+
+  vim-plug runs `do` hooks only for plugins it just installed or updated
+  (`autoload/plug.vim`, `s:do()`), so the hook does **not** fire on a plain
+  `:PlugInstall` over an already-installed plugin. Force it:
+  ```
+  :PlugInstall! markdown-preview.nvim
+  ```
+  Or apply the patch by hand (idempotent — the `-R --check` probe skips it if the
+  patch is already in place):
   ```bash
   git -C ~/.local/share/nvim/plugged/markdown-preview.nvim apply ~/.config/nvim/patches/markdown-preview-local-links.patch
   ```
+  Check whether it is applied with
+  `grep -c 'local markdown links' ~/.local/share/nvim/plugged/markdown-preview.nvim/app/routes.js`.
 
 ---
 
