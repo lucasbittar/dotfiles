@@ -82,7 +82,7 @@ brew install bat btop eza fd fzf git moreutils neovim python3 ripgrep wget tmux 
 
 Core applications:
 ```bash
-brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle notion
+brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle notion hammerspoon
 ```
 
 Fonts:
@@ -99,6 +99,12 @@ Notes:
   alias, but use the new one.
 - Docker Desktop and Karabiner-Elements each need an approval in
   System Settings → Privacy & Security on first launch.
+- **Hammerspoon** handles the app-switch shortcuts (`Ctrl+1`–`Ctrl+4`: Ghostty, Chrome,
+  Slack, Notion) instead of Karabiner. Karabiner's `shell_command` runs on the Mac the
+  keyboard is paired with, so under Universal Control it switched apps on the wrong Mac;
+  plain keys are forwarded, so the Mac with the pointer handles them. Install it on
+  every Mac that shares the keyboard. The old Karabiner rules are kept in
+  `karabiner/backup/app-switch-rules.json`.
 
 **Optional** (ask user first):
 ```bash
@@ -193,7 +199,14 @@ ln -sf ~/.dotfiles/nvim/.config/nvim ~/.config/nvim
 ```bash
 # Karabiner
 ln -sf ~/.dotfiles/karabiner/.config/karabiner ~/.config/karabiner
+
+# Hammerspoon (link the file: Hammerspoon keeps its own data in ~/.hammerspoon)
+mkdir -p ~/.hammerspoon
+ln -sf ~/.dotfiles/hammerspoon/init.lua ~/.hammerspoon/init.lua
 ```
+
+Then launch Hammerspoon once (`open -a Hammerspoon`); `init.lua` enables launch at
+login.
 
 ---
 
@@ -391,3 +404,5 @@ After setup, verify each of these:
 - [ ] Personal repos are cloned into `~/Code` (section 12)
 - [ ] `top` launches btop
 - [ ] Rectangle is running (macOS window snapping; needs Accessibility permission)
+- [ ] Hammerspoon is running and `Ctrl+1`–`Ctrl+4` switch apps on the Mac the pointer
+      is on (Ghostty, Chrome, Slack, Notion)
