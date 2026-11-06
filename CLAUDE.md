@@ -105,6 +105,16 @@ Notes:
   plain keys are forwarded, so the Mac with the pointer handles them. Install it on
   every Mac that shares the keyboard. The old Karabiner rules are kept in
   `karabiner/backup/app-switch-rules.json`.
+- Hammerspoon needs **Accessibility** permission (System Settings → Privacy & Security →
+  Accessibility). macOS reserves `Ctrl+1` for "Switch to Desktop 1" even while that
+  shortcut is disabled, so Hammerspoon can't register it as a hotkey and catches it
+  with an event tap instead, which needs the permission.
+- Karabiner does not always notice edits to `karabiner.json` through the symlink. If a
+  change doesn't take effect, restart its services:
+  ```bash
+  launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.Karabiner-Core-Service-rev2
+  launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.Karabiner-Console-User-Server
+  ```
 
 **Optional** (ask user first):
 ```bash
@@ -205,8 +215,8 @@ mkdir -p ~/.hammerspoon
 ln -sf ~/.dotfiles/hammerspoon/init.lua ~/.hammerspoon/init.lua
 ```
 
-Then launch Hammerspoon once (`open -a Hammerspoon`); `init.lua` enables launch at
-login.
+Then launch Hammerspoon once (`open -a Hammerspoon`) and grant it Accessibility
+permission; `init.lua` enables launch at login.
 
 ---
 
