@@ -82,7 +82,7 @@ brew install bat btop eza fd fzf git moreutils neovim python3 ripgrep wget tmux 
 
 Core applications:
 ```bash
-brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle notion hammerspoon dbeaver-community tableplus
+brew install --cask google-chrome firefox docker-desktop slack spotify vlc karabiner-elements ghostty zoom microsoft-teams rectangle notion hammerspoon dbeaver-community beekeeper-studio
 ```
 
 Fonts:
@@ -105,6 +105,10 @@ Notes:
   plain keys are forwarded, so the Mac with the pointer handles them. Install it on
   every Mac that shares the keyboard. The old Karabiner rules are kept in
   `karabiner/backup/app-switch-rules.json`.
+- **Beekeeper Studio** is the day-to-day SQL client; `dbeaver-community` stays for ER
+  diagrams, which Beekeeper gates behind a paid licence (14-day trial on install).
+  Connections live in `~/Library/Application Support/beekeeper-studio/app.db`, with
+  passwords encrypted using the per-install key in that directory's `.key`.
 - Hammerspoon needs **Accessibility** permission (System Settings → Privacy & Security →
   Accessibility). macOS reserves `Ctrl+1` for "Switch to Desktop 1" even while that
   shortcut is disabled, so Hammerspoon can't register it as a hotkey and catches it
