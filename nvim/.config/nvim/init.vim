@@ -161,6 +161,25 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 
+" Create missing parent directories on save
+autocmd BufWritePre * :call MkdirOnSave()
+
+fun! MkdirOnSave()
+    let l:dir = expand('<afile>:p:h')
+    " skip special buffers and remote paths (scp://, fugitive://)
+    if &buftype ==# '' && l:dir !~# '://' && !isdirectory(l:dir)
+        call mkdir(l:dir, 'p')
+    endif
+endfun
+
+" Prompt for a file to create or open, starting in the current file's directory
+fun! CreateFile()
+    let l:path = input('Create file: ', expand('%:p:h') . '/', 'file')
+    if l:path !=# ''
+        execute 'edit' fnameescape(l:path)
+    endif
+endfun
+
 " No sound errors
 set noerrorbells
 set novisualbell
@@ -207,8 +226,8 @@ nnoremap <leader>. <c-^>
 nnoremap <leader><space> :nohlsearch<CR><CR>:<backspace>
 " kill all open buffers
 nnoremap <leader>bd :bufdo bdelete<CR>
-" Edit file, starting in same directory as current file.
-nnoremap <leader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
+" Create or open a file, starting in the current file's directory
+nnoremap <leader>e :call CreateFile()<CR>
 " Preserve clipboard
 " xnoremap <leader>p \_dP
 " Toggle undotree
