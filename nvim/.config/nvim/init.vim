@@ -240,9 +240,9 @@ nnoremap <leader>a :Rg<CR>
 nnoremap <leader>h :History:<CR>
 " Buffer finder
 nnoremap <leader>b :Buffers<CR>
-" Files finder
-nnoremap <leader>f :Files<CR>
-" Files finder (git)
+" Files finder (everything, .gitignore included)
+nnoremap <leader>f :FilesAll<CR>
+" Files finder (git tracked)
 nnoremap <leader>F :GFiles<CR>
 " Find word in file
 nnoremap <leader>/ :BLines<CR>
@@ -315,6 +315,10 @@ endif
 
 " Don't search for file names
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+" :Files uses $FZF_DEFAULT_COMMAND, which is fd - and fd honours .gitignore, so
+" :Files and :GFiles returned the same list. This one ignores .gitignore.
+command! -bang -nargs=? -complete=dir FilesAll call fzf#vim#files(<q-args>, {'source': 'fd --type f --no-ignore --hidden --exclude .git --exclude node_modules'}, <bang>0)
 
 " }}}
 
