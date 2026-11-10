@@ -34,7 +34,7 @@ mkdir -p ~/.config
 
 ```bash
 sudo apt update && sudo apt install -y \
-  build-essential btop curl wget git fd-find fzf neovim tmux xclip zsh eza
+  build-essential btop curl wget git fd-find fzf jq neovim tmux xclip zsh eza
 ```
 
 Additional tools (install individually):
@@ -77,7 +77,7 @@ If Homebrew is not installed:
 
 Core CLI tools:
 ```bash
-brew install bat btop eza fd fzf git moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
+brew install bat btop eza fd fzf git jq moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
 ```
 
 Core applications:
@@ -185,6 +185,29 @@ Then install the latest LTS version of Node:
 ```bash
 nvm install --lts
 ```
+
+### Chrome DevTools MCP (Claude Code and Cursor)
+
+Gives coding agents a Chrome to drive: load pages, take screenshots, read the console
+and network requests, run performance traces. It runs through `npx`, so set up Node
+first. `--headless` keeps the agent's Chrome from opening a window; drop it to watch
+what the agent does.
+
+Claude Code (user scope, so every project gets it; config lands in `~/.claude.json`):
+```bash
+claude mcp add chrome-devtools --scope user -- npx -y chrome-devtools-mcp@latest --headless
+```
+
+Cursor (the `cursor-agent` CLI and the editor) does not read Claude Code's config. Its
+global servers live in `~/.cursor/mcp.json`; merge the entry in, keeping any others:
+```bash
+f=~/.cursor/mcp.json; mkdir -p ~/.cursor; [ -f "$f" ] || echo '{}' > "$f"
+jq '.mcpServers["chrome-devtools"] = {command: "npx", args: ["-y", "chrome-devtools-mcp@latest", "--headless"]}' "$f" > "$f.new" && mv "$f.new" "$f"
+```
+
+The two configs are separate, so change both when changing the server's flags. Check
+with `claude mcp get chrome-devtools` (expect `✔ Connected`) and `cursor-agent mcp list`
+(expect `chrome-devtools: ready`). New tools only appear in sessions started afterwards.
 
 ---
 
@@ -421,3 +444,5 @@ After setup, verify each of these:
 - [ ] Rectangle is running (macOS window snapping; needs Accessibility permission)
 - [ ] Hammerspoon is running and `Ctrl+1`–`Ctrl+4` switch apps on the Mac the pointer
       is on (Ghostty, Chrome, Slack, Notion)
+- [ ] `claude mcp get chrome-devtools` and `cursor-agent mcp list` show the Chrome
+      DevTools MCP connected (section 6)
