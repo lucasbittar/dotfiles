@@ -224,8 +224,8 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>. <c-^>
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR><CR>:<backspace>
-" kill all open buffers
-nnoremap <leader>bd :bufdo bdelete<CR>
+" kill all open buffers (not ,bd: it made ,b wait for timeoutlen)
+nnoremap <leader>D :bufdo bdelete<CR>
 " Create or open a file, starting in the current file's directory
 nnoremap <leader>e :call CreateFile()<CR>
 " Preserve clipboard
