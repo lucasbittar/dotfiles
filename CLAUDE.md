@@ -34,7 +34,7 @@ mkdir -p ~/.config
 
 ```bash
 sudo apt update && sudo apt install -y \
-  build-essential btop curl wget git fd-find fzf jq neovim tmux xclip zsh eza
+  build-essential btop curl wget git fd-find fzf golang-go gopls jq neovim tmux xclip zsh eza
 ```
 
 Additional tools (install individually):
@@ -77,7 +77,7 @@ If Homebrew is not installed:
 
 Core CLI tools:
 ```bash
-brew install bat btop eza fd fzf git jq moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
+brew install bat btop eza fd fzf git go gopls jq moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
 ```
 
 Core applications:
@@ -293,7 +293,7 @@ nvim --headless +PlugInstall +qall
 Plugins land in `~/.local/share/nvim/plugged`. Requires Node for `coc.nvim`, so run
 this after section 6.
 
-Two plugins need a step that `:PlugInstall` does **not** cover:
+These plugins need a step that `:PlugInstall` does **not** cover:
 
 - **`vim-ai`** needs `pynvim`. `init.vim` points `g:python3_host_prog` at a venv that
   the repo does not ship (it is gitignored), so create it:
@@ -303,6 +303,14 @@ Two plugins need a step that `:PlugInstall` does **not** cover:
   ```
   Without it, every nvim start prints "Python 3 support is required for vim-ai plugin".
   Verify with `:echo has('python3')` (expect `1`).
+
+- **`coc-go`** uses the system `gopls` (installed in section 3), not its own copy:
+  `coc-settings.json` sets `"go.goplsPath": "gopls"`, so `brew upgrade` keeps it
+  current. coc-go's own update check is broken — it looks for `gopls/` tags on the
+  first page of GitHub's `golang/tools` tags, which no longer has any — and warned
+  "checking for a new gopls version failed" daily. Setting `goplsPath` skips it. If
+  `gopls` is missing from PATH, Go files show "goplsPath is configured … but does not
+  exist!".
 
 - **`markdown-preview.nvim`** needs its prebuilt browser binary. The
   `mkdp#util#install()` hook does not run under headless `:PlugInstall`, so fetch it

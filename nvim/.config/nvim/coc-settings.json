@@ -18,6 +18,7 @@
   "javascript.updateImportsOnFileMove.enable": true,
   "prettier.eslintIntegration": true,
   "inlayHint.enable": false,
+  "go.goplsPath": "gopls",
   "[go]": {
     "coc.preferences.formatOnSave": true,
     "editor.codeActionsOnSave": {
