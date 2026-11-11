@@ -29,5 +29,5 @@
   "typescript.preferences.includePackageJsonAutoImports": [
     "on"
   ],
-  "snippets.ultisnips.pythonPrompt": false,
+  "snippets.ultisnips.pythonPrompt": false
 }
