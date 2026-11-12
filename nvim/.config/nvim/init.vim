@@ -25,7 +25,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'gcorne/vim-sass-lint'
 Plug 'github/copilot.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': function('MarkdownPreviewInstall') }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -34,7 +33,6 @@ Plug 'madox2/vim-ai'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
-Plug 'scrooloose/syntastic'
 Plug 'sickill/vim-pasta'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
@@ -72,10 +70,6 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
 
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
-
-" Syntastic
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
 
 " indentLine
 let g:indentLine_enabled = 1
