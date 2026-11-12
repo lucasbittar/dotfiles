@@ -95,8 +95,7 @@ Notes:
   runs `eval "$(/opt/homebrew/bin/brew shellenv)"` (guarded) to put `brew`, `starship`,
   `eza` and `fzf` on PATH. Without that, the section 14 checks for the prompt, fzf
   keybindings and aliases all fail.
-- The `docker` cask is now named **`docker-desktop`**. The old name still resolves via
-  alias, but use the new one.
+- Docker's cask is **`docker-desktop`**.
 - Docker Desktop and Karabiner-Elements each need an approval in
   System Settings → Privacy & Security on first launch.
 - **Hammerspoon** handles the app-switch shortcuts (`Ctrl+1`–`Ctrl+4`: Ghostty, Chrome,
@@ -105,7 +104,7 @@ Notes:
   plain keys are forwarded, so the Mac with the pointer handles them. Install it on
   every Mac that shares the keyboard. The old Karabiner rules are kept in
   `karabiner/backup/app-switch-rules.json`.
-- **Beekeeper Studio** is the SQL client; it replaced both TablePlus and DBeaver.
+- **Beekeeper Studio** is the only SQL client.
   Connections live in `~/Library/Application Support/beekeeper-studio/app.db`, with
   passwords encrypted using the per-install key in that directory's `.key`. Its ER
   diagrams (Tools → Open ER Diagram) need a paid licence — every download includes a
@@ -295,12 +294,13 @@ this after section 6.
 
 These plugins need a step that `:PlugInstall` does **not** cover:
 
-- **`vim-ai`** needs `pynvim`. `init.vim` points `g:python3_host_prog` at a venv that
-  the repo does not ship (it is gitignored), so create it:
+- **`vim-ai`** needs `pynvim`. On macOS, `init.vim` points `g:python3_host_prog` at a
+  venv that the repo does not ship (it is gitignored), so create it:
   ```bash
   python3 -m venv ~/.config/nvim/venv/nvim-python-stable
   ~/.config/nvim/venv/nvim-python-stable/bin/python3 -m pip install pynvim
   ```
+  On Linux it uses `/usr/bin/python3`, so install `pynvim` for that interpreter.
   Without it, every nvim start prints "Python 3 support is required for vim-ai plugin".
   Verify with `:echo has('python3')` (expect `1`).
 
@@ -354,8 +354,9 @@ These plugins need a step that `:PlugInstall` does **not** cover:
   ```
   :PlugInstall! markdown-preview.nvim
   ```
-  Or apply the patch by hand (idempotent — the `-R --check` probe skips it if the
-  patch is already in place):
+  Or apply the patch by hand. Unlike the hook, this doesn't check first: on a plugin
+  that is already patched, `git apply` fails with "patch does not apply", which is
+  harmless:
   ```bash
   git -C ~/.local/share/nvim/plugged/markdown-preview.nvim apply ~/.config/nvim/patches/markdown-preview-local-links.patch
   ```
@@ -450,8 +451,7 @@ wipes the Dock's persistent apps (`persistent-apps -array`), so you will rebuild
 Dock afterward. Needs an interactive sudo password, and some changes — including the
 key repeat rate — only apply to apps launched after a logout.
 
-`Terminal` is no longer in the kill list, so running this from Terminal.app no longer
-kills its own session mid-run.
+`Terminal` is not in the kill list, so the script is safe to run from Terminal.app.
 
 ---
 
