@@ -32,7 +32,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf'
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
 Plug 'sickill/vim-pasta'
 Plug 'stsewd/fzf-checkout.vim'
@@ -253,14 +252,29 @@ nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Show all diagnostics
-nnoremap <silent> <leader>ld  :<C-u>CocFzfList diagnostics<cr>
+nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document
-nnoremap <silent> <leader>ls  :<C-u>CocFzfList outline<cr>
+nnoremap <silent> <leader>ls  :<C-u>CocList outline<cr>
 " Find symbol across the project
-nnoremap <silent> <leader>S  :<C-u>CocFzfList symbols<cr>
+nnoremap <silent> <leader>S  :<C-u>CocList symbols<cr>
 " Show references (gr) and other multi-result jumps in fzf, not coc's list
 let g:coc_enable_locationlist = 0
-autocmd User CocLocationsChange CocFzfList location
+autocmd User CocLocationsChange call s:fzf_locations()
+function! s:fzf_locations() abort
+  let lines = map(copy(g:coc_jump_locations),
+        \ {_, l -> fnamemodify(l.filename, ':.').':'.l.lnum.':'.l.col.':'.l.text})
+  call fzf#run(fzf#wrap(fzf#vim#with_preview({
+        \ 'source': lines,
+        \ 'sink': function('s:jump_to_location'),
+        \ 'options': ['--delimiter', ':', '--prompt', 'References> '] })))
+endfunction
+" fzf calls this before Neovim has left fzf's terminal, where :normal fails, so
+" jump once it has
+function! s:jump_to_location(line) abort
+  let [file, lnum, col] = split(a:line, ':')[0:2]
+  call timer_start(0, {-> execute(["normal! m'", 'edit '.fnameescape(file),
+        \ 'call cursor('.lnum.', '.col.')', 'normal! zz'])})
+endfunction
 " Prev diagnostic
 nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 " Next diagnostic
