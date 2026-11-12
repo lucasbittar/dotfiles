@@ -20,7 +20,8 @@
   "inlayHint.enable": false,
   "go.goplsPath": "gopls",
   "go.goplsOptions": {
-    "semanticTokens": true
+    "semanticTokens": true,
+    "symbolScope": "workspace"
   },
   "semanticTokens.enable": true,
   "[go]": {

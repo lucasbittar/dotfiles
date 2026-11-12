@@ -32,6 +32,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
 Plug 'sickill/vim-pasta'
 Plug 'stsewd/fzf-checkout.vim'
@@ -60,8 +61,11 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
+" Setting this replaces fzf.vim's defaults, so ctrl-t and ctrl-x are restated
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
 " Hide statusline
@@ -226,8 +230,8 @@ nnoremap <leader>e :call CreateFile()<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 " Toggle markdown preview
 nnoremap <leader>m :MarkdownPreviewToggle<CR>
-" Project finder
-nnoremap <leader>a :Rg<CR>
+" Project search (ripgrep re-runs as you type)
+nnoremap <leader>a :RG<CR>
 " History finder
 nnoremap <leader>h :History:<CR>
 " Buffer finder
@@ -249,9 +253,14 @@ nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Show all diagnostics
-nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>ld  :<C-u>CocFzfList diagnostics<cr>
 " Find symbol of current document
-nnoremap <silent> <leader>ls  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>ls  :<C-u>CocFzfList outline<cr>
+" Find symbol across the project
+nnoremap <silent> <leader>S  :<C-u>CocFzfList symbols<cr>
+" Show references (gr) and other multi-result jumps in fzf, not coc's list
+let g:coc_enable_locationlist = 0
+autocmd User CocLocationsChange CocFzfList location
 " Prev diagnostic
 nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 " Next diagnostic
@@ -304,9 +313,6 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --follow
   set grepformat^=%f:%l:%c:%m   " file:line:column:message
 endif
-
-" Don't search for file names
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " :Files uses $FZF_DEFAULT_COMMAND, which is fd - and fd honours .gitignore, so
 " :Files and :GFiles returned the same list. This one ignores .gitignore.
