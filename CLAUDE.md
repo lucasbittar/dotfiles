@@ -77,7 +77,7 @@ If Homebrew is not installed:
 
 Core CLI tools:
 ```bash
-brew install bat btop eza fd fzf git go gopls jq moreutils neovim python3 ripgrep wget tmux yt-dlp starship diff-so-fancy
+brew install bat btop eza fd fzf git go gopls jq moreutils neovim python3 ripgrep wget tmux tree-sitter-cli yt-dlp starship diff-so-fancy
 ```
 
 Core applications:
@@ -303,6 +303,26 @@ These plugins need a step that `:PlugInstall` does **not** cover:
   ```
   Without it, every nvim start prints "Python 3 support is required for vim-ai plugin".
   Verify with `:echo has('python3')` (expect `1`).
+
+- **`nvim-treesitter`** (the `main` branch) compiles a parser per language, which needs
+  the `tree-sitter` CLI (0.26.1+, installed in section 3 on macOS; on Linux use
+  `cargo install tree-sitter-cli` — the apt package is too old, and the plugin says
+  not to use npm) and a C compiler. `init.vim` installs the parser list on start, in
+  the background; to build them up front instead:
+  ```bash
+  nvim --headless -c 'lua require("nvim-treesitter").install({"go","gomod","gosum","python","javascript","typescript","tsx","json","html","css","scss","yaml","toml","bash","lua","vim","vimdoc","markdown","markdown_inline","dockerfile","sql","prisma"}):wait(600000)' -c qa
+  ```
+  Parsers land in `~/.local/share/nvim/site/parser`. Check with
+  `:checkhealth nvim-treesitter`. Without the CLI, files fall back to the old regex
+  syntax highlighting.
+
+- **Theme**: `colors/benokai.lua` (Monokai colours on the terminal's background)
+  colours Tree-sitter captures and coc's semantic tokens. `coc-settings.json` turns
+  semantic tokens on (`gopls` needs `go.goplsOptions.semanticTokens` too), and
+  `init.vim` sets `g:coc_default_semantic_highlight_groups = 0` so coc's default
+  links don't override Tree-sitter's finer colours. A `CursorHold` autocmd
+  highlights every reference to the symbol under the cursor (`CocHighlightText`,
+  `CocHighlightWrite` for assignments).
 
 - **`coc-go`** uses the system `gopls` (installed in section 3), not its own copy:
   `coc-settings.json` sets `"go.goplsPath": "gopls"`, so `brew upgrade` keeps it

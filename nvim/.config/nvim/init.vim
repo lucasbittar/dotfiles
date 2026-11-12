@@ -25,18 +25,14 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-sort-motion'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'gcorne/vim-sass-lint'
 Plug 'github/copilot.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': function('MarkdownPreviewInstall') }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'madox2/vim-ai'
 Plug 'mbbill/undotree'
-Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/yajs.vim'
-Plug 'scrooloose/syntastic'
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
 Plug 'sickill/vim-pasta'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
@@ -74,10 +70,6 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
 
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
-
-" Syntastic
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
 
 " indentLine
 let g:indentLine_enabled = 1
@@ -339,22 +331,32 @@ autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2
 
 " VISUAL {{{
 
-syntax on " Enable syntax highlight
+syntax on " Enable syntax highlight (fallback for filetypes without a Tree-sitter parser)
 
-let g:coc_default_semantic_highlight_groups = 1
+" Tree-sitter highlighting. Parsers are compiled on first start, which needs the
+" tree-sitter CLI and a C compiler; install() is a no-op once they're built.
+lua << EOF
+if vim.fn.executable('tree-sitter') == 1 then
+  require('nvim-treesitter').install({
+    'go', 'gomod', 'gosum', 'python', 'javascript', 'typescript', 'tsx',
+    'json', 'html', 'css', 'scss', 'yaml', 'toml', 'bash', 'lua', 'vim',
+    'vimdoc', 'markdown', 'markdown_inline', 'dockerfile', 'sql', 'prisma',
+  })
+end
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args) pcall(vim.treesitter.start, args.buf) end,
+})
+EOF
+
+" Semantic colours come from colors/benokai.lua, not coc's defaults
+let g:coc_default_semantic_highlight_groups = 0
+
+" Highlight every reference to the symbol under the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Set theme
-set t_Co=256
 set termguicolors
-
-set background=dark
-
-if exists("syntax_on")
-  syntax reset
-endif
-
-" My Custom Theme
-source $HOME/.config/nvim/benokai.vim
+colorscheme benokai
 
 set laststatus=2 " Show status line
 set showmode " Show what mode you're currently in
