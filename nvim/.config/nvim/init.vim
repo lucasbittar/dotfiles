@@ -35,6 +35,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
 Plug 'sickill/vim-pasta'
+Plug 'sindrets/diffview.nvim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -263,6 +264,21 @@ nnoremap <silent> <leader>S  :<C-u>CocFzfList symbols<cr>
 nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 " Next diagnostic
 nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
+" Review uncommitted changes (toggle)
+nnoremap <silent> <leader>gd <Cmd>lua if require('diffview.lib').get_current_view() then vim.cmd('DiffviewClose') else vim.cmd('DiffviewOpen') end<CR>
+" Review the whole branch against the default branch, uncommitted changes included
+nnoremap <silent> <leader>gD :DiffviewOpen origin/HEAD...HEAD --imply-local<CR>
+" History of the current file
+nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>
+lua << EOF
+-- q closes; ,b and ,e stay the buffer picker and new-file prompt
+local keep = { q = '<Cmd>DiffviewClose<CR>', ['<leader>b'] = false, ['<leader>e'] = false }
+require('diffview').setup({
+  enhanced_diff_hl = true, -- removed lines red on the left, not green
+  use_icons = false,       -- no nvim-web-devicons
+  keymaps = { view = keep, file_panel = keep, file_history_panel = keep },
+})
+EOF
 " Moves selected line up/down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv

@@ -66,10 +66,12 @@ local groups = {
   PmenuSel      = { fg = '#eeeeee', bg = c.ref, bold = true },
   PmenuSbar     = { bg = c.panel },
   PmenuThumb    = { bg = c.selection },
-  DiffAdd       = { fg = c.fg, bg = '#5f8700', bold = true },
-  DiffDelete    = { fg = '#870000' },
-  DiffChange    = { fg = c.fg, bg = '#005f5f' },
-  DiffText      = { fg = c.fg, bg = '#005f87', bold = true },
+  -- Diffs: backgrounds only, so syntax colours stay readable on changed lines
+  DiffAdd       = { bg = '#26331a' },
+  DiffDelete    = { bg = '#3a1c24' },  -- diffview copies it for removed lines
+  DiffChange    = { bg = '#1a2c33' },
+  DiffText      = { bg = '#2c4f5c' },  -- the changed words in a changed line
+  DiffviewDiffDeleteDim = { fg = c.invisible },  -- filler opposite added/removed lines
 
   -- Diagnostics (coc's CocError*/CocWarning* groups link to these)
   DiagnosticError          = { fg = c.pink },
