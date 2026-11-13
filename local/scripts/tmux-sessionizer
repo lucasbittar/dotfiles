@@ -1,26 +1,53 @@
 #!/usr/bin/env bash
+# Fuzzy-pick a project and switch to its tmux session, creating it if needed.
+# Open sessions are listed first (most recent first), then projects:
+# ~/Code/*, git repos one level deeper (~/Code/*/*), and ~/.local/*.
 
-selected=$(find ~/Code ~/.local -mindepth 1 -maxdepth 1 -type d | fzf --layout=default --height=100% --info=inline)
-
-if [[ -z "$selected" ]]; then
-  exit 0
-fi
-
-selected_name=$(basename $selected | tr ":,. " "____")
-
-switch_to() {
-    if [[ -z "$TMUX" ]]; then
-        tmux attach-session -t $selected_name
-        tmux send-keys -t $selected_name "ready-tmux" ^M
-    else
-        tmux switch-client -t $selected_name
-    fi
+# Session name for a project: "pv7", or "index-connect/index-ui" when nested
+session_name() {
+  local rel=${1#"$HOME/Code/"}
+  [[ $rel == "$1" ]] && rel=$(basename "$1")
+  echo "$rel" | tr ":. " "___"
 }
 
-if tmux has-session -t="$selected_name" 2>/dev/null; then
-    switch_to
-    exit 0
+current=$(tmux display-message -p '#S' 2>/dev/null)
+
+list() {
+  {
+    tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null |
+      sort -rn | sed 's/^[0-9]* /S /'
+    {
+      find ~/Code ~/.local -mindepth 1 -maxdepth 1 -type d
+      find ~/Code -mindepth 3 -maxdepth 3 -name .git -prune | sed 's|/\.git$||'
+    } | sort | sed 's/^/P /'
+  } | awk -v cur="$current" -v home="$HOME" '
+    # Same naming as session_name(); projects with an open session are skipped
+    /^S / { name = substr($0, 3); open[name] = 1; if (name != cur) print "● " name; next }
+    {
+      dir = substr($0, 3); code = home "/Code/"
+      if (index(dir, code) == 1) name = substr(dir, length(code) + 1)
+      else { n = split(dir, part, "/"); name = part[n] }
+      gsub(/[:. ]/, "_", name)
+      if (!(name in open)) print "~" substr(dir, length(home) + 1)
+    }'
+}
+
+selected=$(list | fzf --layout=default --height=100% --info=inline --prompt='project> ')
+[[ -z $selected ]] && exit 0
+
+if [[ $selected == "● "* ]]; then
+  name=${selected#● }
 else
-    tmux new-session -ds $selected_name -c $selected
-    switch_to
+  dir=${selected/#\~/$HOME}
+  name=$(session_name "$dir")
+  if ! tmux has-session -t="$name" 2>/dev/null; then
+    tmux new-session -ds "$name" -c "$dir"
+    ~/.ready-tmux "$name"
+  fi
+fi
+
+if [[ -z $TMUX ]]; then
+  tmux attach-session -t="$name"
+else
+  tmux switch-client -t="$name"
 fi
