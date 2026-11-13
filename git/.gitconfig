@@ -33,6 +33,23 @@
     autocrlf = input
     editor = vim
     excludesfile = ~/.gitignore
+    pager = delta
+
+[interactive]
+
+    # Syntax highlighting in `git add -p` too
+    diffFilter = delta --color-only
+
+[delta]
+
+    navigate = true           # n / N jump between files
+    line-numbers = true
+    syntax-theme = Monokai Extended
+    # Same backgrounds as Neovim's diffs (colors/benokai.lua)
+    plus-style = syntax "#26331a"
+    plus-emph-style = syntax "#3f5a24"
+    minus-style = syntax "#3a1c24"
+    minus-emph-style = syntax "#6b2836"
 
 [alias]
     in = !(git fetch --quiet && git log --pretty=format:'%C(yellow)%h %C(white)- %C(red)%an %C(white)- %C(cyan)%d%Creset %s %C(white)- %ar%Creset' ..@{u})

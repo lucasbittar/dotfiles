@@ -17,7 +17,7 @@ Claude reads `CLAUDE.md` and walks through installing packages, creating symlink
 - **zsh** — config with Starship prompt, vi mode, fzf integration, manually sourced plugins
 - **neovim** — full config with plugin support
 - **tmux** — config with TPM, ready-tmux script, tmux-sessionizer
-- **git** — gitconfig, global gitignore, extras, diff-so-fancy
+- **git** — gitconfig, global gitignore, extras, delta (syntax-highlighted diffs)
 - **Ghostty** — terminal config
 - **Starship** — prompt theme
 - **shell aliases** — shared + OS-specific aliases

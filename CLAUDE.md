@@ -40,7 +40,9 @@ sudo apt update && sudo apt install -y \
 Additional tools (install individually):
 
 - **Starship prompt**: `curl -sS https://starship.rs/install.sh | sh`
-- **diff-so-fancy**: `sudo snap install diff-so-fancy` (or `npm install -g diff-so-fancy`)
+- **delta** (git's pager, set in `.gitconfig`): `sudo apt install -y git-delta` on Ubuntu
+  23.04+; on older releases (Pop!_OS 22.04) install the `.deb` from
+  https://github.com/dandavison/delta/releases with `sudo dpkg -i`
 - **Google Chrome**: download the `.deb` from https://www.google.com/chrome/ and install with `sudo dpkg -i`
 - **Ghostty**: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"`
 
@@ -77,7 +79,7 @@ If Homebrew is not installed:
 
 Core CLI tools:
 ```bash
-brew install bat btop eza fd fzf git go gopls jq moreutils neovim python3 ripgrep wget tmux tree-sitter-cli yt-dlp starship diff-so-fancy
+brew install bat btop eza fd fzf git go gopls jq moreutils neovim python3 ripgrep wget tmux tree-sitter-cli yt-dlp starship git-delta
 ```
 
 Core applications:
@@ -323,6 +325,13 @@ These plugins need a step that `:PlugInstall` does **not** cover:
   links don't override Tree-sitter's finer colours. A `CursorHold` autocmd
   highlights every reference to the symbol under the cursor (`CocHighlightText`,
   `CocHighlightWrite` for assignments).
+
+- **`diffview.nvim`** is for reviewing changes: `,gd` toggles a view of every
+  uncommitted change, `,gD` reviews the whole branch against `origin/HEAD`
+  (uncommitted changes included), `,gh` shows the current file's history, and `q`
+  closes it. `,gD` needs `origin/HEAD`, which `git clone` sets; for a repo that was
+  `git init`-ed and pushed, run `git remote set-head origin -a` once. In the terminal,
+  `gd` (`git diff`) goes through `delta`, themed with the same diff colours.
 
 - **`coc-go`** uses the system `gopls` (installed in section 3), not its own copy:
   `coc-settings.json` sets `"go.goplsPath": "gopls"`, so `brew upgrade` keeps it
