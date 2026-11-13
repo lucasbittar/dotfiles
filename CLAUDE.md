@@ -210,6 +210,32 @@ The two configs are separate, so change both when changing the server's flags. C
 with `claude mcp get chrome-devtools` (expect `✔ Connected`) and `cursor-agent mcp list`
 (expect `chrome-devtools: ready`). New tools only appear in sessions started afterwards.
 
+### Agent skills
+
+Skills are reusable instructions an agent loads when a task matches. Install them with
+the `skills` CLI rather than committing them here: the content is fetched from someone
+else's repo, like `~/.local/share/nvim/plugged`, so this repo records the command and
+the CLI fetches the files.
+
+```bash
+npx skills add vercel-labs/agent-skills -g -s vercel-react-best-practices -a '*' -y
+```
+
+`-g` installs user-wide and `-a '*'` targets every agent, so the skill lands once in
+`~/.agents/skills/` — the cross-agent path Codex, Cursor, Amp and Cline read directly,
+and that Claude Code and ~55 others get symlinked into (`~/.claude/skills/<name>` →
+`~/.agents/skills/<name>`). One copy, one `npx skills update -g` to refresh them all.
+
+Check with `npx skills list -g`. Skills load at session start, so start a new session
+afterwards. Note the skill is named `vercel-react-best-practices`, not
+`react-best-practices`; `npx skills add vercel-labs/agent-skills -l` lists the real
+names.
+
+`~/.agents/.skill-lock.json` pins each skill by source and content hash, but nothing
+restores global skills from it — `skills experimental_install` reads a *project*
+`skills-lock.json` instead — so it is not worth committing. Skills written here, by
+contrast, are ours: keep them in the repo and symlink them in from section 7.
+
 ---
 
 ## 7. Create Symlinks
@@ -489,3 +515,5 @@ After setup, verify each of these:
       is on (Ghostty, Chrome, Slack, Notion)
 - [ ] `claude mcp get chrome-devtools` and `cursor-agent mcp list` show the Chrome
       DevTools MCP connected (section 6)
+- [ ] `npx skills list -g` lists `vercel-react-best-practices` under
+      `~/.agents/skills` (section 6)
