@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-# if [[ -x ".ready-tmux" ]]; then
-#   ./.ready-tmux
-# elif [[ -x "~/.ready-tmux" ]]; then
-#   ~/.ready-tmux
-# fi
+# Set up the current session's layout by hand (tmux-sessionizer does it for new sessions)
 
 ~/.ready-tmux
 

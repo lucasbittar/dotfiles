@@ -278,6 +278,12 @@ Or install them without the manual step:
 ~/.tmux/plugins/tpm/bin/install_plugins
 ```
 
+`prefix + f` opens `tmux-sessionizer` (section 8) in a new window. It lists open sessions
+first, most recent first, then `~/Code/*`, git repos one level deeper
+(`~/Code/index-connect/index-ui` becomes the session `index-connect/index-ui`) and
+`~/.local/*`. New sessions get the layout from `tmux/.ready-tmux`. tmux's own
+`prefix + L` jumps back to the previous session.
+
 ---
 
 ## 10. Neovim Plugins

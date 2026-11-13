@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# Layout for a new session: the first window split in two, plus a "scratch" window,
+# both in the session's directory.
+# Targets session $1 (tmux-sessionizer passes it), or the current session.
 
-tmux split-window -v
-tmux neww -n scratch
+target=()
+[[ -n $1 ]] && target=(-t "=$1:")
+
+tmux split-window -v "${target[@]}" -c '#{session_path}'
+tmux new-window -d -n scratch "${target[@]}" -c '#{session_path}'
