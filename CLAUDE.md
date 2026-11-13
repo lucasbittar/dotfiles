@@ -282,7 +282,7 @@ Or install them without the manual step:
 first, most recent first, then `~/Code/*`, git repos one level deeper
 (`~/Code/index-connect/index-ui` becomes the session `index-connect/index-ui`) and
 `~/.local/*`. New sessions get the layout from `tmux/.ready-tmux`. tmux's own
-`prefix + L` jumps back to the previous session. `display-popup` needs tmux 3.2+.
+`prefix + L` jumps back to the previous session.
 
 ---
 
