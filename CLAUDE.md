@@ -306,8 +306,9 @@ Or install them without the manual step:
 
 `prefix + f` opens `tmux-sessionizer` (section 8) in a new window. It lists open sessions
 first, most recent first, then `~/Code/*`, git repos one level deeper
-(`~/Code/index-connect/index-ui` becomes the session `index-connect/index-ui`) and
-`~/.local/*`. New sessions get the layout from `tmux/.ready-tmux`. tmux's own
+(`~/Code/index-connect/index-ui` becomes the session `index-connect/index-ui`), the
+folders inside the `workspaces` the script lists (`~/Code/fullstack-journey` and its
+`projects/`, one session per course or project) and `~/.local/*`. New sessions get the layout from `tmux/.ready-tmux`. tmux's own
 `prefix + L` jumps back to the previous session.
 
 ---
