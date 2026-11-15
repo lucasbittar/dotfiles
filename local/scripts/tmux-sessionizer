@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Fuzzy-pick a project and switch to its tmux session, creating it if needed.
 # Open sessions are listed first (most recent first), then projects:
-# ~/Code/*, git repos one level deeper (~/Code/*/*), and ~/.local/*.
+# ~/Code/*, git repos one level deeper (~/Code/*/*), the folders inside each
+# workspace below, and ~/.local/*.
+
+# Repos whose subfolders are projects of their own (one session each)
+workspaces=(~/Code/fullstack-journey ~/Code/fullstack-journey/projects)
 
 # Session name for a project: "pv7", or "index-connect/index-ui" when nested
 session_name() {
@@ -19,7 +23,8 @@ list() {
     {
       find ~/Code ~/.local -mindepth 1 -maxdepth 1 -type d
       find ~/Code -mindepth 3 -maxdepth 3 -name .git -prune | sed 's|/\.git$||'
-    } | sort | sed 's/^/P /'
+      find "${workspaces[@]}" -mindepth 1 -maxdepth 1 -type d -not -name '.*' 2>/dev/null
+    } | sort -u | sed 's/^/P /'
   } | awk -v cur="$current" -v home="$HOME" '
     # Same naming as session_name(); projects with an open session are skipped
     /^S / { name = substr($0, 3); open[name] = 1; if (name != cur) print "● " name; next }
