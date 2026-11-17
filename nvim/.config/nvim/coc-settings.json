@@ -30,7 +30,6 @@
       "source.organizeImports": "always"
     }
   },
-  "tslint.jsEnable": true,
   "typescript.preferences.includePackageJsonAutoImports": [
     "on"
   ],
