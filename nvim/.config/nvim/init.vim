@@ -74,7 +74,7 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
+let g:coc_global_extensions = ['coc-eslint', 'coc-css', 'coc-highlight', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-yank', 'coc-prettier', 'coc-pyright', 'coc-go', 'coc-prisma', 'coc-lua']
 
 " indentLine
 let g:indentLine_enabled = 1
